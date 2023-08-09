@@ -1,0 +1,10 @@
+displayName = Loita
+author = Uin&Lacewing
+version = 0.1
+
+hideCode = true
+hideResources = true
+includeSource = false
+buildIgnore = *.csproj, *.sln, *.user, obj\*, bin\*, .vs\*, Old\*
+includePDB = false
+dllReferences = FontStashSharp.FNA,FontStashSharp.Base,StbImageSharp,FontStashSharp.Rasterizers.StbTrueTypeSharp,System.Numerics.Vectors,Cyotek.Drawing.BitmapFont,StbTrueTypeSharp

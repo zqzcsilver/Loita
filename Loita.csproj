@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\tModLoader.targets" />
+  <PropertyGroup>
+    <AssemblyName>Loita</AssemblyName>
+    <TargetFramework>net6.0</TargetFramework>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
+	  <PackageReference Include="QuickAssetReference.TModLoader" Version="1.0.3">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+  </ItemGroup>
+	<ItemGroup>
+		<Reference Include="FontStashSharp.FNA">
+			<HintPath>lib\FontStashSharp.FNA.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\LoitaUISystem.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="IBinarySupport.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\IInfusion.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIElements\UITextButtonPlus.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIContainers\StaffInfusionManager\StaffInfusionManager.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIContainers\StaffInfusionManager\UIElements\UIChoices.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="Fonts\SourceHanSansHWSC_VF.ttf" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIContainers\InfusionBackpack\InfusionBackpack.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="UI\UIContainers\InfusionBackpack\Images\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIContainers\InfusionBackpack\FilterCondition.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove=".gitignore" />
+	</ItemGroup>
+</Project>
