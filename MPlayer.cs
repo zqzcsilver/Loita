@@ -43,6 +43,8 @@ namespace Loita
 
         public void GainComponent(LoitaComponent component)
         {
+            if (component == null)
+                return;
             if (ComponentBackpack.Count == 0)
             {
                 ComponentBackpack.Add(component);

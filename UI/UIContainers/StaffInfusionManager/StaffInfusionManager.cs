@@ -171,13 +171,99 @@ namespace Loita.UI.UIContainers.StaffInfusionManager
                 Close();
         }
 
+        public void ResetInfusions(int index = -1)
+        {
+            infusionSlotContainer.ClearAllElements();
+            if (_infusionSlot != null)
+            {
+                int i = 0;
+                foreach (var comp in _infusionSlot.ActivableSpace)
+                {
+                    int isr = i;
+                    UIChoices choice = new UIChoices();
+                    choice.Info.Width.SetValue(46f, 0f);
+                    choice.Info.Height.SetValue(46f, 0f);
+                    choice.Info.Left.SetValue(46f * i, 0f);
+                    choice.Events.OnLeftClick += element =>
+                    {
+                        var ibp = InfusionBackpack.InfusionBackpack.Instance;
+                        if (choice.IsSelected && (!ibp.IsVisible || !ibp.HasInfusionSlot))
+                        {
+                            ibp.Close();
+                            ibp.Show(_infusionSlot, isr);
+                        }
+                        Choices = choice;
+                        if (ibp.HasInfusionSlot)
+                            ibp.ChangeInfusionSlot(_infusionSlot, isr);
+                    };
+                    infusionSlotContainer.AddElement(choice);
+
+                    if (i == index)
+                        Choices = choice;
+
+                    UIImage image = new UIImage(comp == null ? ModAssets_Texture2D.Images.CBlockImmediateAsset.Value :
+                        comp.Texture, Color.White);
+                    image.Info.Width.SetValue(0f, 1f);
+                    image.Info.Height.SetValue(0f, 1f);
+                    image.Events.OnUpdate += (e, gt) =>
+                    {
+                        var cp = _infusionSlot.ActivableSpace[isr];
+                        image.ChangeImage(cp == null ? ModAssets_Texture2D.Images.CBlockImmediateAsset.Value : cp.Texture);
+                    };
+                    choice.Register(image);
+
+                    UIImage take = new UIImage(comp == null ? ModAssets_Texture2D.Images.TakeInImmediateAsset.Value :
+                        ModAssets_Texture2D.Images.TakeOutImmediateAsset.Value, Color.White);
+                    take.Info.Width.SetValue(0f, 1f);
+                    take.Info.Height.SetValue(0f, 1f);
+                    choice.Register(take);
+
+                    choice.Events.OnMouseHover += element =>
+                    {
+                        var cp = _infusionSlot.ActivableSpace[isr];
+                        if (cp == null || cp.ActivableSpace == null)
+                            return;
+                        foreach (var comp2 in cp.ActivableSpace)
+                        {
+                            var c = (UIChoices)infusionSlotContainer.Elements[comp2.Index];
+                            //if (!c.IsSelected)
+                            c.PanelColor = Color.Yellow * choice.Progression.Value;
+                        }
+                    };
+                    choice.Events.OnUpdate += (element, gt) =>
+                    {
+                        choice.BorderColor = choice.PanelColor;
+                        if (choice.IsSelected)
+                        {
+                            take.ChangeColor(Color.White * choice.Progression.Value);
+                            image.ChangeColor(Color.White * Math.Max(0.6f, 1f - choice.Progression.Value));
+                            var cp = _infusionSlot.ActivableSpace[isr];
+                            if (cp == null || cp.ActivableSpace == null)
+                                return;
+                            foreach (var comp2 in cp.ActivableSpace)
+                            {
+                                var c = (UIChoices)infusionSlotContainer.Elements[comp2.Index];
+                                //if (!c.IsSelected)
+                                c.PanelColor = Color.Yellow;
+                            }
+                        }
+                        else
+                        {
+                            take.ChangeColor(Color.Transparent);
+                            image.ChangeColor(Color.White);
+                        }
+                    };
+                    i++;
+                }
+            }
+        }
+
         public override void Show(params object[] args)
         {
             base.Show(args);
             componentsContainer.ClearAllElements();
-            infusionSlotContainer.ClearAllElements();
             _infusionSlot = null;
-            if (args.Length > 0 && args[0] is IEntity entity && entity.HasComponent<CInfusionSlot>())
+            if (args.Length > 0 && args[0] is IEntity entity)
             {
                 var comps = entity.GetComponents();
                 int i = 0;
@@ -202,72 +288,19 @@ namespace Loita.UI.UIContainers.StaffInfusionManager
                         _infusionSlot = infusionSlot;
                     }
                 }
-                if (_infusionSlot != null)
-                {
-                    i = 0;
-                    foreach (var comp in _infusionSlot.ActivableSpace)
-                    {
-                        UIChoices choice = new UIChoices();
-                        choice.Info.Width.SetValue(46f, 0f);
-                        choice.Info.Height.SetValue(46f, 0f);
-                        choice.Info.Left.SetValue(46f * i, 0f);
-                        //choice.NoSelectedPrimaryColor = Color.Black;
-                        choice.Events.OnLeftClick += element =>
-                        {
-                            Choices = (UIChoices)element;
-                        };
-                        infusionSlotContainer.AddElement(choice);
-
-                        UIImage image = new UIImage(comp == null ? ModAssets_Texture2D.Images.CBlockImmediateAsset.Value :
-                            comp.Texture, Color.White);
-                        image.Info.Width.SetValue(0f, 1f);
-                        image.Info.Height.SetValue(0f, 1f);
-                        choice.Register(image);
-
-                        UIImage take = new UIImage(comp == null ? ModAssets_Texture2D.Images.TakeInImmediateAsset.Value :
-                            ModAssets_Texture2D.Images.TakeOutImmediateAsset.Value, Color.White);
-                        take.Info.Width.SetValue(0f, 1f);
-                        take.Info.Height.SetValue(0f, 1f);
-                        choice.Register(take);
-
-                        choice.Events.OnMouseHover += element =>
-                        {
-                            if (comp == null || comp.ActivableSpace == null)
-                                return;
-                            foreach (var comp2 in comp.ActivableSpace)
-                            {
-                                var c = (UIChoices)infusionSlotContainer.Elements[comp2.Index];
-                                //if (!c.IsSelected)
-                                c.PanelColor = Color.Yellow * choice.Progression.Value;
-                            }
-                        };
-                        choice.Events.OnUpdate += (element, gt) =>
-                        {
-                            choice.BorderColor = choice.PanelColor;
-                            if (choice.IsSelected)
-                            {
-                                take.ChangeColor(Color.White * choice.Progression.Value);
-                                image.ChangeColor(Color.White * Math.Max(0.6f, (1f - choice.Progression.Value)));
-                                if (comp == null || comp.ActivableSpace == null)
-                                    return;
-                                foreach (var comp2 in comp.ActivableSpace)
-                                {
-                                    var c = (UIChoices)infusionSlotContainer.Elements[comp2.Index];
-                                    //if (!c.IsSelected)
-                                    c.PanelColor = Color.Yellow;
-                                }
-                            }
-                            else
-                            {
-                                take.ChangeColor(Color.Transparent);
-                                image.ChangeColor(Color.White);
-                            }
-                        };
-                        i++;
-                    }
-                }
             }
             Choices = defaultChoices;
+            ResetInfusions();
+        }
+
+        public override void Close(params object[] args)
+        {
+            base.Close(args);
+            var ibp = InfusionBackpack.InfusionBackpack.Instance;
+            if (ibp.CInfusionSlot == _infusionSlot)
+            {
+                ibp.Close();
+            }
         }
     }
 }

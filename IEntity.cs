@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Loita.Components;
 
-using Loita.Components;
+using System;
+using System.Collections.Generic;
 
 namespace Loita
 {
@@ -15,6 +15,17 @@ namespace Loita
         public Dictionary<string, List<IComponent>> CallOrder { get; }
         public Dictionary<string, Dictionary<IComponent, Delegate>> Hooks { get; }
         private static Dictionary<Type, List<IComponent>> Dependencies = new Dictionary<Type, List<IComponent>>();
+
+        public object[] Call(string funcName, params object[] args)
+        {
+            if (!CallOrder.ContainsKey(funcName))
+                return null;
+            var co = CallOrder[funcName];
+            object[] rts = new object[co.Count];
+            int i = 0;
+            co.ForEach(c => rts[i++] = Hooks[funcName][c].DynamicInvoke(args));
+            return rts;
+        }
 
         /// <summary>
         /// 装载组件
@@ -226,8 +237,10 @@ namespace Loita
         /// <returns>卸载成功返回true，否则返回false</returns>
         public bool RemoveComponent(IComponent component)
         {
-            bool op = false;
+            if (component == null)
+                return false;
 
+            bool op = false;
             Dependencies.Clear();
             foreach (var c in CallOrder.Values)
             {

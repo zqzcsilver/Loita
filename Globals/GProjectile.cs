@@ -1,14 +1,10 @@
-﻿using System;
+﻿using Loita.Components;
+
+using System;
 using System.Collections.Generic;
-
-using Microsoft.Xna.Framework;
-
-using Loita.Components;
 
 using Terraria;
 using Terraria.ModLoader;
-
-using static Loita.Components.ProjectileComponents.LogicComponentBase;
 
 namespace Loita.Globals
 {
@@ -23,13 +19,15 @@ namespace Loita.Globals
         private Dictionary<string, List<IComponent>> _callOrder = new Dictionary<string, List<IComponent>>();
         public Dictionary<string, Dictionary<IComponent, Delegate>> Hooks => _hooks;
         private Dictionary<string, Dictionary<IComponent, Delegate>> _hooks = new Dictionary<string, Dictionary<IComponent, Delegate>>();
+        public IEntity Entity => this;
 
         public override bool PreAI(Projectile projectile)
         {
             bool op = true;
             var funcName = nameof(PreAI);
-            if (CallOrder.ContainsKey(funcName))
-                CallOrder[funcName].ForEach(c => op &= (bool)Hooks[funcName][c].DynamicInvoke(projectile));
+            var ops = Entity.Call(funcName, projectile);
+            if (ops != null)
+                Array.ForEach(ops, o => op &= (bool)o);
             return op;
         }
 
@@ -37,25 +35,21 @@ namespace Loita.Globals
         {
             base.AI(projectile);
             var funcName = nameof(AI);
-            if (CallOrder.ContainsKey(funcName))
-                CallOrder[funcName].ForEach(c => Hooks[funcName][c].DynamicInvoke(projectile));
+            Entity.Call(funcName, projectile);
         }
 
         public override void PostAI(Projectile projectile)
         {
             base.PostAI(projectile);
             var funcName = nameof(PostAI);
-            if (CallOrder.ContainsKey(funcName))
-                CallOrder[funcName].ForEach(c => Hooks[funcName][c].DynamicInvoke(projectile));
+            Entity.Call(funcName, projectile);
         }
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             base.OnHitNPC(projectile, target, hit, damageDone);
             var funcName = nameof(OnHitNPC);
-            if (CallOrder.ContainsKey(funcName))
-                CallOrder[funcName].ForEach(c =>
-                Hooks[funcName][c].DynamicInvoke(projectile, target, hit, damageDone));
+            Entity.Call(funcName, projectile, target, hit, damageDone);
         }
 
         public IEntity Clone(object source)

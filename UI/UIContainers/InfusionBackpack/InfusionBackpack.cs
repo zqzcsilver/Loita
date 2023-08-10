@@ -17,12 +17,14 @@ namespace Loita.UI.UIContainers.InfusionBackpack
     internal class InfusionBackpack : UIContainerElement
     {
         public static InfusionBackpack Instance =>
-            (InfusionBackpack)Loita.UISystem.Elements["Loita.UI.UIContainers.StaffInfusionManager.InfusionBackpack"];
+            (InfusionBackpack)Loita.UISystem.Elements["Loita.UI.UIContainers.InfusionBackpack.InfusionBackpack"];
 
         private UIContainerPanel infusionSlotContainer;
         private CInfusionSlot _infusionSlot;
         private int _infusionSlotIndex = -1;
+        public CInfusionSlot CInfusionSlot => _infusionSlot;
         public List<LoitaComponent> Infusions => Main.LocalPlayer.GetModPlayer<MPlayer>().ComponentBackpack;
+        public MPlayer Player => Main.LocalPlayer.GetModPlayer<MPlayer>();
 
         public UIChoices Choices
         {
@@ -174,26 +176,24 @@ namespace Loita.UI.UIContainers.InfusionBackpack
             panel.Register(boundaryLine);
         }
 
-        public override void PreUpdate(GameTime gt)
-        {
-            base.PreUpdate(gt);
-            if (Main.playerInventory && !IsVisible)
-            {
-                Show();
-            }
-            if (!Main.playerInventory && IsVisible)
-                Close();
-        }
-
         public override void Show(params object[] args)
         {
             base.Show(args);
             _infusionSlot = null;
-            if (args.Length > 0 && args[0] is CInfusionSlot cInfusionSlot)
+            if (args.Length > 0 && args[0] is CInfusionSlot cInfusionSlot && args[1] is int infusionSlotIndex)
             {
                 _infusionSlot = cInfusionSlot;
+                _infusionSlotIndex = infusionSlotIndex;
             }
             ResetInfusions();
+        }
+
+        public bool HasInfusionSlot => _infusionSlot != null;
+
+        public void ChangeInfusionSlot(CInfusionSlot cInfusionSlot, int infusionSlotIndex)
+        {
+            _infusionSlot = cInfusionSlot;
+            _infusionSlotIndex = infusionSlotIndex;
         }
 
         public void ResetInfusions()
@@ -210,6 +210,15 @@ namespace Loita.UI.UIContainers.InfusionBackpack
                 takeOut.Info.Top.SetValue(46f * j, 0f);
                 takeOut.Events.OnLeftClick += element =>
                 {
+                    var nc = _infusionSlot.ActivableSpace[_infusionSlotIndex];
+                    _infusionSlot.ChangeComponent(_infusionSlotIndex, null);
+                    Player.GainComponent(nc);
+
+                    int i = 0;
+                    _infusionSlot.InitActivableSpace(ref i);
+
+                    //ResetInfusions();
+                    Close();
                 };
                 infusionSlotContainer.AddElement(takeOut);
 
@@ -261,7 +270,13 @@ namespace Loita.UI.UIContainers.InfusionBackpack
                         var nc = _infusionSlot.ActivableSpace[_infusionSlotIndex];
                         Infusions.Remove(comp);
                         _infusionSlot.ChangeComponent(_infusionSlotIndex, comp);
-                        Infusions.Add(nc);
+                        Player.GainComponent(nc);
+
+                        int i = 0;
+                        _infusionSlot.InitActivableSpace(ref i);
+
+                        //ResetInfusions();
+                        Close();
                     }
                     Choices = choice;
                 };
@@ -285,7 +300,7 @@ namespace Loita.UI.UIContainers.InfusionBackpack
                     if (choice.IsSelected && _infusionSlot != null)
                     {
                         take.ChangeColor(Color.White * choice.Progression.Value);
-                        image.ChangeColor(Color.White * Math.Max(0.6f, (1f - choice.Progression.Value)));
+                        image.ChangeColor(Color.White * Math.Max(0.6f, 1f - choice.Progression.Value));
                     }
                     else
                     {

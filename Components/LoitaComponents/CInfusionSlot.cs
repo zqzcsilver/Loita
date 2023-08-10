@@ -42,6 +42,12 @@ namespace Loita.Components.LoitaComponents
             return count;
         }
 
+        public override void Load()
+        {
+            Entity.RegisterHook(this, "Apply", Apply);
+            Entity.RegisterHook(this, "InitActivableSpace", InitActivableSpace);
+        }
+
         public override void Apply(SpellInfo info)
         {
             foreach (var comp in _activableSpace)
@@ -79,7 +85,7 @@ namespace Loita.Components.LoitaComponents
             var comp = _activableSpace.Find(c => c == component);
             if (ocomps.Count == 1)
                 Entity.RemoveComponent(ocomp);
-            if (comp == null)
+            if (comp == null && component != null)
                 Entity.AddComponent(component);
             _activableSpace[index] = component;
         }

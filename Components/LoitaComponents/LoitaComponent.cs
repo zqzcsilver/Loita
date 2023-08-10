@@ -29,7 +29,6 @@ namespace Loita.Components.LoitaComponents
 
         public override void Load()
         {
-            Entity.RegisterHook(this, "Apply", Apply);
         }
 
         public virtual void InitActivableSpace(ref int index)
