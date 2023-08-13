@@ -32,10 +32,7 @@
 	  <ModFile Remove="UI\UIElements\UITextButtonPlus.cs" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ModFile Remove="UI\UIContainers\StaffInfusionManager\StaffInfusionManager.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ModFile Remove="UI\UIContainers\StaffInfusionManager\UIElements\UIChoices.cs" />
+	  <ModFile Remove="UI\UIContainers\WandInfusionManager\UIElements\UIChoices.cs" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Include="Fonts\SourceHanSansHWSC_VF.ttf" />
@@ -44,6 +41,7 @@
 	  <ModFile Remove="UI\UIContainers\InfusionBackpack\InfusionBackpack.cs" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Components\CommonComponents\" />
 	  <Folder Include="UI\UIContainers\InfusionBackpack\Images\" />
 	</ItemGroup>
 	<ItemGroup>
@@ -51,5 +49,26 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ModFile Remove=".gitignore" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\CInfusion.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIContainers\UIElements\UITips.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Globals\GItem.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Items\WandBase.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIContainers\WandInfusionManager\WandInfusionManager.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Items\TestWand.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Prefixes\DoubleDamage.cs" />
 	</ItemGroup>
 </Project>

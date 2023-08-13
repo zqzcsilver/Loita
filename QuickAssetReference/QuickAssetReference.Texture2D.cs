@@ -22,6 +22,9 @@ public static class ModAssets_Texture2D
                 public static Asset<Texture2D> CLightPrefixAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CLightPrefixPath);
                 public static Asset<Texture2D> CLightPrefixImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CLightPrefixPath, AssetRequestMode.ImmediateLoad);
                 public const string CLightPrefixPath = "Components/LoitaComponents/Prefixes/CLightPrefix";
+                public static Asset<Texture2D> DoubleDamageAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(DoubleDamagePath);
+                public static Asset<Texture2D> DoubleDamageImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(DoubleDamagePath, AssetRequestMode.ImmediateLoad);
+                public const string DoubleDamagePath = "Components/LoitaComponents/Prefixes/DoubleDamage";
             }
 
             public static class Spells
@@ -47,12 +50,22 @@ public static class ModAssets_Texture2D
         public static Asset<Texture2D> CBlockAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CBlockPath);
         public static Asset<Texture2D> CBlockImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CBlockPath, AssetRequestMode.ImmediateLoad);
         public const string CBlockPath = "Images/CBlock";
+        public static Asset<Texture2D> ChangeAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(ChangePath);
+        public static Asset<Texture2D> ChangeImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(ChangePath, AssetRequestMode.ImmediateLoad);
+        public const string ChangePath = "Images/Change";
         public static Asset<Texture2D> TakeInAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(TakeInPath);
         public static Asset<Texture2D> TakeInImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(TakeInPath, AssetRequestMode.ImmediateLoad);
         public const string TakeInPath = "Images/TakeIn";
         public static Asset<Texture2D> TakeOutAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(TakeOutPath);
         public static Asset<Texture2D> TakeOutImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(TakeOutPath, AssetRequestMode.ImmediateLoad);
         public const string TakeOutPath = "Images/TakeOut";
+    }
+
+    public static class Items
+    {
+        public static Asset<Texture2D> TestWandAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(TestWandPath);
+        public static Asset<Texture2D> TestWandImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(TestWandPath, AssetRequestMode.ImmediateLoad);
+        public const string TestWandPath = "Items/TestWand";
     }
 
     public static class UI

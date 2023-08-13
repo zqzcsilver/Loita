@@ -1,25 +1,27 @@
 ﻿using Loita.Components;
 using Loita.Components.LoitaComponents;
-using Loita.Components.LoitaComponents.Prefixes;
-using Loita.Components.LoitaComponents.Spells;
-using Loita.Components.LoitaComponents.Triggers;
 using Loita.Globals;
 using Loita.QuickAssetReference;
-using Loita.UI.UIContainers.StaffInfusionManager.UIElements;
+using Loita.UI.UIContainers.UIElements;
+using Loita.UI.UIContainers.WandInfusionManager.UIElements;
 using Loita.UI.UIElements;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 using System;
 
 using Terraria;
+using Terraria.GameContent;
+using Terraria.ID;
 
-namespace Loita.UI.UIContainers.StaffInfusionManager
+namespace Loita.UI.UIContainers.WandInfusionManager
 {
-    internal class StaffInfusionManager : UIContainerElement
+    internal class WandInfusionManager : UIContainerElement
     {
-        public static StaffInfusionManager Instance =>
-            (StaffInfusionManager)Loita.UISystem.Elements["Loita.UI.UIContainers.StaffInfusionManager.StaffInfusionManager"];
+        public static WandInfusionManager Instance =>
+            (WandInfusionManager)Loita.UISystem.Elements["Loita.UI.UIContainers.WandInfusionManager.WandInfusionManager"];
 
         private UIContainerPanel componentsContainer;
         private UIContainerPanel componentInfoContainer;
@@ -47,6 +49,7 @@ namespace Loita.UI.UIContainers.StaffInfusionManager
         }
 
         private UIChoices defaultChoices;
+        private UITips _tips;
 
         public override void OnInitialization()
         {
@@ -110,13 +113,8 @@ namespace Loita.UI.UIContainers.StaffInfusionManager
             componentInfoContainer = new UIContainerPanel();
             componentInfo.Register(componentInfoContainer);
 
-            UIText uIText = new UIText("Test Component", Loita.DefaultFontSystem.GetFont(Loita.DEFAULT_FONT_SIZE - 10f), Color.White);
-            componentInfoContainer.AddElement(uIText);
-
-            UIText tip = new UIText("Tips:\nThis is a Test Component",
-                Loita.DefaultFontSystem.GetFont(Loita.DEFAULT_FONT_SIZE - 20f), Color.White);
-            tip.Info.Top.SetValue(uIText.Info.Height);
-            componentInfoContainer.AddElement(tip);
+            _tips = new UITips((LoitaComponent)null);
+            componentInfoContainer.AddElement(_tips);
 
             verticalScrollbar = new UIVerticalScrollbar();
             verticalScrollbar.Info.Height.SetValue(componentInfo.Info.Height);
@@ -144,30 +142,21 @@ namespace Loita.UI.UIContainers.StaffInfusionManager
         public override void PreUpdate(GameTime gt)
         {
             base.PreUpdate(gt);
-            if (Main.playerInventory && !IsVisible)
-            {
-                var player = Main.LocalPlayer;
-                var projectile = Projectile.NewProjectileDirect(player.GetSource_FromThis(),
-                    player.Center, player.velocity, 10, 10, 10f, player.whoAmI);
-                IEntity entity = projectile.GetGlobalProjectile<GProjectile>();
-                entity.AddComponent<CInfusionSlot>(entity, 20);
-                var cis = entity.GetComponent<CInfusionSlot>();
-                int index = 0;
-                cis.ChangeComponent(index++, new CDoubleSpell(entity));
-                cis.ChangeComponent(index++, new CLightPrefix(entity));
-                cis.ChangeComponent(index++, new CDoubleSpell(entity));
-                cis.ChangeComponent(index++, new CTestSpell(entity));
-                cis.ChangeComponent(index++, new CTestSpell(entity));
-                cis.ChangeComponent(index++, new CTestSpell(entity));
-                index = 0;
-                cis.InitActivableSpace(ref index);
-                var si = SpellInfo.FromPlayer(player);
-                si.Velocity = new Vector2(0f, -10f);
-                cis.Apply(si);
 
-                Show(entity);
+            if (Main.keyState.IsKeyDown(Keys.I) && Main.HoverItem != null && Main.HoverItem.type != ItemID.None &&
+                Main.HoverItem.TryGetGlobalItem(out GItem gitem) && gitem.Entity.HasComponent<CInfusionSlot>() && !IsVisible)
+            {
+                if (gitem.OriginalItem == null)
+                {
+                    Show(gitem, TextureAssets.Item[Main.HoverItem.type].Value);
+                }
+                else if (gitem.OriginalItem.TryGetGlobalItem(out GItem ngitem))
+                {
+                    if (ngitem.Entity.HasComponent<CInfusionSlot>())
+                        Show(ngitem, TextureAssets.Item[gitem.OriginalItem.type].Value);
+                }
             }
-            if (!Main.playerInventory && IsVisible)
+            if (Main.keyState.IsKeyDown(Keys.N) && IsVisible)
                 Close();
         }
 
@@ -232,6 +221,11 @@ namespace Loita.UI.UIContainers.StaffInfusionManager
                     };
                     choice.Events.OnUpdate += (element, gt) =>
                     {
+                        if (choice.IsSelected && _tips.LoitaComponent != _infusionSlot.ActivableSpace[isr])
+                        {
+                            _tips.Reset();
+                            _tips.LoitaComponent = _infusionSlot.ActivableSpace[isr];
+                        }
                         choice.BorderColor = choice.PanelColor;
                         if (choice.IsSelected)
                         {
@@ -263,6 +257,7 @@ namespace Loita.UI.UIContainers.StaffInfusionManager
             base.Show(args);
             componentsContainer.ClearAllElements();
             _infusionSlot = null;
+            _tips.Reset();
             if (args.Length > 0 && args[0] is IEntity entity)
             {
                 var comps = entity.GetComponents();
@@ -279,14 +274,34 @@ namespace Loita.UI.UIContainers.StaffInfusionManager
                         {
                             Choices = (UIChoices)element;
                             _infusionSlotIndex = i;
+
+                            _tips.Reset();
+                            _tips.Infusion = infusion;
                         };
                         componentsContainer.AddElement(choice);
+
+                        UIText text = new UIText(infusion.Name, Loita.DefaultFontSystem.GetFont(22f));
+                        text.Info.Left.SetValue(2f, 0f);
+                        choice.Register(text);
                         i++;
                     }
                     if (comp is CInfusionSlot infusionSlot)
                     {
                         _infusionSlot = infusionSlot;
                     }
+                }
+
+                if (args[1] is Texture2D texture)
+                {
+                    defaultChoices.RemoveAll();
+
+                    UIImage image = new UIImage(texture, Color.White);
+                    var scale = Math.Max(texture.Width / defaultChoices.Info.Size.X, texture.Height / defaultChoices.Info.Size.Y) / 0.7f;
+                    image.Info.Width.Pixel /= scale;
+                    image.Info.Height.Pixel /= scale;
+                    image.Info.Left.SetValue(PositionStyle.Half - image.Info.Width / 2f);
+                    image.Info.Top.SetValue(PositionStyle.Half - image.Info.Height / 2f);
+                    defaultChoices.Register(image);
                 }
             }
             Choices = defaultChoices;

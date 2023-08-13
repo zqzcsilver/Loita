@@ -7,38 +7,19 @@ using Microsoft.Xna.Framework.Graphics;
 
 using System;
 
-using Terraria;
-
-namespace Loita.Components.ProjectileComponents
+namespace Loita.Components
 {
-    internal class LightComponent : LogicComponentBase, IInfusion
+    internal abstract class CInfusion : ComponentBase, IInfusion
     {
-        public string Name => "发光";
-
-        public string Description => "此魔法将会发出光芒";
-
-        public LightComponent(IEntity entity) : base(entity)
+        protected CInfusion(IEntity entity) : base(entity)
         {
         }
 
-        public override void Load()
-        {
-            RegisterHook(HookType.AI, AI);
-            RegisterHook(HookType.Okay, new OkayDelegate(Okay));
-        }
+        public string Name => string.Empty;
 
-        public override void Okay(Projectile projectile, ref Color color)
-        {
-            base.Okay(projectile, ref color);
-        }
+        public string Description => string.Empty;
 
-        public override void AI(Projectile projectile)
-        {
-            base.AI(projectile);
-            Lighting.AddLight(projectile.position, 1f, 1f, 1f);
-        }
-
-        public void DrawTips(SpriteBatch sb, Vector2 startPos, Vector2 containerSize, out Vector2 size)
+        public virtual void DrawTips(SpriteBatch sb, Vector2 startPos, Vector2 containerSize, out Vector2 size)
         {
             size = Vector2.Zero;
             var nameFont = Loita.DefaultFontSystem.GetFont(30f);

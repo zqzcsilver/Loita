@@ -18,6 +18,10 @@ namespace Loita.Components.LoitaComponents
         public int SlotSize => _slotSize;
         private int _slotSize;
 
+        public CInfusionSlot(IEntity entity) : this(entity, 20)
+        {
+        }
+
         public CInfusionSlot(IEntity entity, int slotSize) : base(entity)
         {
             if (slotSize < 0)
@@ -74,6 +78,19 @@ namespace Loita.Components.LoitaComponents
             }
         }
 
+        public override IComponent Clone(IEntity cloneEntity)
+        {
+            var op = (CInfusionSlot)base.Clone(cloneEntity);
+            for (int i = 0; i < _activableSpace.Count; i++)
+                op.ChangeComponent(i, (LoitaComponent)_activableSpace[i]?.Clone(cloneEntity));
+            return op;
+        }
+
+        public override IComponent PrimitiveClone(IEntity cloneEntity)
+        {
+            return new CInfusionSlot(cloneEntity, SlotSize);
+        }
+
         public void ChangeComponent(int index, LoitaComponent component)
         {
             if (index < 0 || index >= SlotSize)
@@ -88,6 +105,8 @@ namespace Loita.Components.LoitaComponents
             if (comp == null && component != null)
                 Entity.AddComponent(component);
             _activableSpace[index] = component;
+            if (_activableSpace[index] != null)
+                _activableSpace[index].Entity = Entity;
         }
 
         public override void WriteToBinary(BinaryWriter bw)
@@ -108,7 +127,7 @@ namespace Loita.Components.LoitaComponents
         public override void ReadOnBinary(BinaryReader br)
         {
             _slotSize = br.ReadInt32();
-            int count = GetLoitaComponentCount();
+            int count = br.ReadInt32();
             for (int i = 0; i < count; i++)
             {
                 int index = br.ReadInt32();

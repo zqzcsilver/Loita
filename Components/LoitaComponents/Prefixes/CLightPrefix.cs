@@ -14,6 +14,11 @@ namespace Loita.Components.LoitaComponents.Prefixes
     internal class CLightPrefix : CPrefix
     {
         public override Texture2D Texture => ModAssets_Texture2D.Components.LoitaComponents.Prefixes.CLightPrefixImmediateAsset.Value;
+
+        public override string Name => "发光";
+
+        public override string Description => "为魔法附加发光效果";
+
         public CLightPrefix(IEntity entity) : base(entity)
         {
         }

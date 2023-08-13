@@ -2,10 +2,11 @@
 using Loita.Components.LoitaComponents.Prefixes;
 using Loita.Components.LoitaComponents.Spells;
 using Loita.QuickAssetReference;
-using Loita.UI.UIContainers.StaffInfusionManager.UIElements;
+using Loita.UI.UIContainers.WandInfusionManager.UIElements;
 using Loita.UI.UIElements;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 using System;
 using System.Collections.Generic;
@@ -26,44 +27,49 @@ namespace Loita.UI.UIContainers.InfusionBackpack
         public List<LoitaComponent> Infusions => Main.LocalPlayer.GetModPlayer<MPlayer>().ComponentBackpack;
         public MPlayer Player => Main.LocalPlayer.GetModPlayer<MPlayer>();
 
-        public UIChoices Choices
-        {
-            get => choices;
-            set
-            {
-                if (choices == value)
-                    return;
-                if (choices != null)
-                {
-                    choices.Progression.Value = 1f;
-                    choices.IsSelected = false;
-                }
-                choices = value;
-                choices.IsSelected = true;
-                choices.Progression.Value = 0f;
-            }
-        }
+        //public UIChoices Choices
+        //{
+        //    get => choices;
+        //    set
+        //    {
+        //        if (choices == value)
+        //            return;
+        //        if (choices != null)
+        //        {
+        //            choices.Progression.Value = 1f;
+        //            choices.IsSelected = false;
+        //        }
+        //        choices = value;
+        //        choices.IsSelected = true;
+        //        choices.Progression.Value = 0f;
+        //    }
+        //}
 
-        private UIChoices choices;
+        //private UIChoices choices;
         private int lineInfusionCount = 0;
+
         public FilterCondition FilterCondition = new FilterCondition();
 
         public override void OnInitialization()
         {
             base.OnInitialization();
+
             UIPanel panel = new UIPanel();
-            panel.Info.Width.SetValue(490f, 0f);
+            panel.Info.Width.SetValue(530f, 0f);
             panel.Info.Height.SetValue(300f, 0f);
             panel.Info.Left.SetValue(PositionStyle.Half - panel.Info.Width / 2f);
             panel.Info.Top.SetValue(PositionStyle.Half - panel.Info.Height / 2f);
             panel.CanDrag = true;
             Register(panel);
 
+            float interval = 6f;
+
             UIInputBox searchBox = new UIInputBox(string.Empty, 28f, Point.Zero, Color.White);
             searchBox.Info.Width.SetValue(268f, 0f);
             searchBox.Info.Height.SetValue(34f, 0f);
-            searchBox.Info.Left.SetValue(18f, 0f);
             searchBox.Info.Top.SetValue(18f, 0f);
+            searchBox.Info.Left.SetValue(PositionStyle.Full - searchBox.Info.Top - searchBox.Info.Width);
+            searchBox.Info.Left.Pixel -= 34f + interval;
             searchBox.PanelColor = new Color(163, 163, 163);
             searchBox.Info.IsSensitive = true;
             panel.Register(searchBox);
@@ -76,27 +82,36 @@ namespace Loita.UI.UIContainers.InfusionBackpack
                 text.Info.IsVisible = string.IsNullOrEmpty(searchBox.Text);
             };
 
-            float interval = 6f;
+            UITextButtonPlus close = new UITextButtonPlus("×", Loita.DefaultFontSystem.GetFont(30f), Color.White);
+            close.Info.Width.SetValue(34f, 0f);
+            close.Info.Height.SetValue(34f, 0f);
+            close.Info.Left.SetValue(PositionStyle.Full - close.Info.Width - searchBox.Info.Top);
+            close.Info.Top.SetValue(searchBox.Info.Top);
+            close.LockSize = true;
+            close.LightColor = Color.Red;
+            close.Events.OnLeftClick += element => Close();
+            panel.Register(close);
+
             UIChoices filterButton = new UIChoices();
             filterButton.Info.Width.SetValue(34f, 0f);
             filterButton.Info.Height.SetValue(34f, 0f);
-            filterButton.Info.Left.SetValue(PositionStyle.Full - filterButton.Info.Width - searchBox.Info.Left);
+            filterButton.Info.Left.SetValue(searchBox.Info.Top);
             filterButton.Info.Top.SetValue(searchBox.Info.Top);
             panel.Register(filterButton);
 
             UIChoices filterButton1 = new UIChoices();
             filterButton1.Info.Width.SetValue(34f, 0f);
             filterButton1.Info.Height.SetValue(34f, 0f);
-            filterButton1.Info.Left.SetValue(filterButton.Info.Left - filterButton1.Info.Width);
-            filterButton1.Info.Left.Pixel -= interval;
+            filterButton1.Info.Left.SetValue(filterButton.Info.Left + filterButton.Info.Width);
+            filterButton1.Info.Left.Pixel += interval;
             filterButton1.Info.Top.SetValue(searchBox.Info.Top);
             panel.Register(filterButton1);
 
             UIChoices filterButton2 = new UIChoices();
             filterButton2.Info.Width.SetValue(34f, 0f);
             filterButton2.Info.Height.SetValue(34f, 0f);
-            filterButton2.Info.Left.SetValue(filterButton1.Info.Left - filterButton2.Info.Width);
-            filterButton2.Info.Left.Pixel -= interval;
+            filterButton2.Info.Left.SetValue(filterButton1.Info.Left + filterButton1.Info.Width);
+            filterButton2.Info.Left.Pixel += interval;
             filterButton2.Info.Top.SetValue(searchBox.Info.Top);
             panel.Register(filterButton2);
 
@@ -138,20 +153,22 @@ namespace Loita.UI.UIContainers.InfusionBackpack
             };
 
             UIPanel infusionPanel = new UIPanel();
-            infusionPanel.Info.Left.SetValue(searchBox.Info.Left);
+            infusionPanel.Info.Left.SetValue(searchBox.Info.Top);
             infusionPanel.Info.Top.SetValue(searchBox.Info.Height + (searchBox.Info.Top * 2f));
             //infusionPanel.Info.Top.Pixel += 4f;
             infusionPanel.Info.Width.SetValue(PositionStyle.Full - (infusionPanel.Info.Left * 2f));
             infusionPanel.Info.Height.SetValue(PositionStyle.Full - infusionPanel.Info.Top - searchBox.Info.Top);
-            var t = (int)panel.Info.Width.Pixel % 46;
-            t -= 2;
-            lineInfusionCount = (int)panel.Info.Width.Pixel / 46;
+            int originalWidth = (int)(panel.Info.Width.Pixel - infusionPanel.Info.Left.Pixel * 2f);
+            int cellWidth = 46 * 2;
+            var t = originalWidth % cellWidth;
+            t -= 10;
+            lineInfusionCount = originalWidth / cellWidth;
             if (t < 20)
             {
-                t += 46;
+                t += cellWidth / 2;
                 lineInfusionCount--;
             }
-            lineInfusionCount--;
+            //lineInfusionCount--;
             infusionPanel.Info.Width.Pixel -= t;
             panel.Register(infusionPanel);
 
@@ -160,7 +177,7 @@ namespace Loita.UI.UIContainers.InfusionBackpack
             infusionPanel.Register(infusionSlotContainer);
 
             UIVerticalScrollbar verticalScrollbar = new UIVerticalScrollbar();
-            verticalScrollbar.Info.Left.SetValue(PositionStyle.Full - searchBox.Info.Left - verticalScrollbar.Info.Width);
+            verticalScrollbar.Info.Left.SetValue(PositionStyle.Full - searchBox.Info.Top - verticalScrollbar.Info.Width);
             verticalScrollbar.Info.Top.SetValue(infusionPanel.Info.Top);
             verticalScrollbar.Info.Height.SetValue(infusionPanel.Info.Height);
             panel.Register(verticalScrollbar);
@@ -168,11 +185,10 @@ namespace Loita.UI.UIContainers.InfusionBackpack
             verticalScrollbar.BindElement = infusionPanel;
 
             UIPanel boundaryLine = new UIPanel();
-            boundaryLine.Info.Width.SetValue(PositionStyle.Full - (infusionPanel.Info.Left * 2f));
+            boundaryLine.Info.Width.SetValue(PositionStyle.Full - (searchBox.Info.Top * 2f));
             boundaryLine.Info.Height.SetValue(4f, 0f);
-            boundaryLine.Info.Left.SetValue(searchBox.Info.Left);
-            boundaryLine.Info.Top.SetValue(searchBox.Info.Top * 1.5f + searchBox.Info.Height);
-            boundaryLine.Info.Top.Pixel -= 2f;
+            boundaryLine.Info.Left.SetValue(searchBox.Info.Top);
+            boundaryLine.Info.Top.SetValue(searchBox.Info.Top * 1.5f + searchBox.Info.Height - boundaryLine.Info.Height / 2f);
             panel.Register(boundaryLine);
         }
 
@@ -204,9 +220,9 @@ namespace Loita.UI.UIContainers.InfusionBackpack
             if (_infusionSlot != null)
             {
                 UIChoices takeOut = new UIChoices();
-                takeOut.Info.Width.SetValue(46f, 0f);
+                takeOut.Info.Width.SetValue(92f, 0f);
                 takeOut.Info.Height.SetValue(46f, 0f);
-                takeOut.Info.Left.SetValue(46f * i, 0f);
+                takeOut.Info.Left.SetValue(92f * i, 0f);
                 takeOut.Info.Top.SetValue(46f * j, 0f);
                 takeOut.Events.OnLeftClick += element =>
                 {
@@ -217,18 +233,18 @@ namespace Loita.UI.UIContainers.InfusionBackpack
                     int i = 0;
                     _infusionSlot.InitActivableSpace(ref i);
 
-                    //ResetInfusions();
-                    Close();
+                    ResetInfusions();
+                    //Close();
                 };
                 infusionSlotContainer.AddElement(takeOut);
 
                 UIImage takeOutImage = new UIImage(ModAssets_Texture2D.Images.CBlockImmediateAsset.Value, Color.White);
-                takeOutImage.Info.Width.SetValue(0f, 1f);
+                takeOutImage.Info.Width.SetValue(0f, 0.5f);
                 takeOutImage.Info.Height.SetValue(0f, 1f);
                 takeOut.Register(takeOutImage);
 
                 UIImage takeOutImage1 = new UIImage(ModAssets_Texture2D.Images.TakeOutImmediateAsset.Value, Color.White);
-                takeOutImage1.Info.Width.SetValue(0f, 1f);
+                takeOutImage1.Info.Width.SetValue(0f, 0.5f);
                 takeOutImage1.Info.Height.SetValue(0f, 1f);
                 takeOut.Register(takeOutImage1);
 
@@ -236,6 +252,11 @@ namespace Loita.UI.UIContainers.InfusionBackpack
                 {
                     takeOut.BorderColor = takeOut.PanelColor;
                 };
+
+                UIText count = new UIText("×1", Loita.DefaultFontSystem.GetFont(18f));
+                count.CenterX = new PositionStyle(0f, 0.75f);
+                count.CenterY = new PositionStyle(0f, 0.5f);
+                takeOut.Register(count);
 
                 i++;
                 if (i >= lineInfusionCount)
@@ -255,17 +276,26 @@ namespace Loita.UI.UIContainers.InfusionBackpack
                     return true;
                 return false;
             });
-            foreach (var comp in infusions)
+            Dictionary<(Type, string, Texture2D), List<LoitaComponent>> comps = new Dictionary<(Type, string, Texture2D), List<LoitaComponent>>();
+            infusions.ForEach(c =>
             {
+                var key = (c.GetType(), c.Name, c.Texture);
+                if (!comps.ContainsKey(key))
+                    comps.Add(key, new List<LoitaComponent>());
+                comps[key].Add(c);
+            });
+            foreach (var cp in comps)
+            {
+                var comp = cp.Value[0];
                 UIChoices choice = new UIChoices();
-                choice.Info.Width.SetValue(46f, 0f);
+                choice.Info.Width.SetValue(92f, 0f);
                 choice.Info.Height.SetValue(46f, 0f);
-                choice.Info.Left.SetValue(46f * i, 0f);
+                choice.Info.Left.SetValue(92f * i, 0f);
                 choice.Info.Top.SetValue(46f * j, 0f);
                 //choice.NoSelectedPrimaryColor = Color.Black;
                 choice.Events.OnLeftClick += element =>
                 {
-                    if (choice.IsSelected && _infusionSlot != null)
+                    if (/*choice.IsSelected && */_infusionSlot != null)
                     {
                         var nc = _infusionSlot.ActivableSpace[_infusionSlotIndex];
                         Infusions.Remove(comp);
@@ -275,22 +305,22 @@ namespace Loita.UI.UIContainers.InfusionBackpack
                         int i = 0;
                         _infusionSlot.InitActivableSpace(ref i);
 
-                        //ResetInfusions();
-                        Close();
+                        ResetInfusions();
+                        //Close();
                     }
-                    Choices = choice;
+                    //Choices = choice;
                 };
                 infusionSlotContainer.AddElement(choice);
 
                 UIImage image = new UIImage(comp == null ? ModAssets_Texture2D.Images.CBlockImmediateAsset.Value :
                     comp.Texture, Color.White);
-                image.Info.Width.SetValue(0f, 1f);
+                image.Info.Width.SetValue(0f, 0.5f);
                 image.Info.Height.SetValue(0f, 1f);
                 choice.Register(image);
 
                 UIImage take = new UIImage(comp == null ? ModAssets_Texture2D.Images.TakeOutImmediateAsset.Value :
                     ModAssets_Texture2D.Images.TakeInImmediateAsset.Value, Color.Transparent);
-                take.Info.Width.SetValue(0f, 1f);
+                take.Info.Width.SetValue(0f, 0.5f);
                 take.Info.Height.SetValue(0f, 1f);
                 choice.Register(take);
 
@@ -308,6 +338,11 @@ namespace Loita.UI.UIContainers.InfusionBackpack
                         image.ChangeColor(Color.White);
                     }
                 };
+
+                UIText count = new UIText($"×{cp.Value.Count}", Loita.DefaultFontSystem.GetFont(18f));
+                count.CenterX = new PositionStyle(0f, 0.75f);
+                count.CenterY = new PositionStyle(0f, 0.5f);
+                choice.Register(count);
 
                 i++;
                 if (i >= lineInfusionCount)

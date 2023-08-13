@@ -1,4 +1,5 @@
-﻿using Loita.Components.LoitaComponents;
+﻿using Loita.Components;
+using Loita.Components.LoitaComponents;
 using Loita.Components.LoitaComponents.Prefixes;
 using Loita.Components.LoitaComponents.Spells;
 using Loita.Components.LoitaComponents.Triggers;
@@ -14,29 +15,42 @@ using Terraria.ModLoader.IO;
 
 namespace Loita
 {
-    internal class MPlayer : ModPlayer, IBinarySupport
+    internal class MPlayer : ModPlayer, IBinarySupport, IEntity
     {
+        public object Source { get => _source; set => _source = value; }
+        private object _source;
+
+        public Dictionary<string, List<IComponent>> CallOrder => _callOrder;
+
+        private Dictionary<string, List<IComponent>> _callOrder = new Dictionary<string, List<IComponent>>();
+        public Dictionary<string, Dictionary<IComponent, Delegate>> Hooks => _hooks;
+        private Dictionary<string, Dictionary<IComponent, Delegate>> _hooks = new Dictionary<string, Dictionary<IComponent, Delegate>>();
+        public IEntity IAmEntity => this;
+
         public List<LoitaComponent> ComponentBackpack = new List<LoitaComponent>();
         public static MPlayer Instance => Main.LocalPlayer.GetModPlayer<MPlayer>();
 
         public override void OnEnterWorld()
         {
-            var player = Player;
-            var projectile = Projectile.NewProjectileDirect(player.GetSource_FromThis(),
-                player.Center, player.velocity, 10, 10, 10f, player.whoAmI);
-            IEntity entity = projectile.GetGlobalProjectile<GProjectile>();
-            var random = new Random();
-            for (int i = 0; i < 100; i++)
+            //var random = new Random();
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    var r = random.Next(4);
+            //    if (r == 0)
+            //        GainComponent(new CDoubleSpell(null));
+            //    else if (r == 1)
+            //        GainComponent(new CTestSpell(null));
+            //    else if (r == 2)
+            //        GainComponent(new CLightPrefix(null));
+            //    else if (r == 3)
+            //        GainComponent(new CFirePrefix(null));
+            //}
+            for (int i = 0; i < 20; i++)
             {
-                var r = random.Next(4);
-                if (r == 0)
-                    GainComponent(new CDoubleSpell(entity));
-                else if (r == 1)
-                    GainComponent(new CTestSpell(entity));
-                else if(r == 2)
-                    GainComponent(new CLightPrefix(entity));
-                else if (r == 3)
-                    GainComponent(new CFirePrefix(entity));
+                GainComponent(new CDoubleSpell(null));
+                GainComponent(new CLightPrefix(null));
+                GainComponent(new DoubleDamage(null));
+                GainComponent(new CTestSpell(null));
             }
             base.OnEnterWorld();
         }
@@ -48,6 +62,7 @@ namespace Loita
             if (ComponentBackpack.Count == 0)
             {
                 ComponentBackpack.Add(component);
+                return;
             }
             int endIndex = ComponentBackpack.Count - 1;
             int middle;
@@ -105,6 +120,17 @@ namespace Loita
                 bw.Write(c.GetType().FullName);
                 c.WriteToBinary(bw);
             }
+
+            //var comps = IAmEntity.GetComponents();
+            //bw.Write(comps.Count);
+            //comps.ForEach(c =>
+            //{
+            //    bw.Write(c.GetType().FullName);
+            //    if (c is IBinarySupport binarySupport)
+            //    {
+            //        binarySupport.WriteToBinary(bw);
+            //    }
+            //});
         }
 
         public void ReadOnBinary(BinaryReader br)
@@ -117,6 +143,21 @@ namespace Loita
                 comp.ReadOnBinary(br);
                 ComponentBackpack.Add(comp);
             }
+        }
+
+        public IEntity Clone(object source)
+        {
+            return (IEntity)MemberwiseClone();
+        }
+
+        public IEntity PrimitiveClone(object source)
+        {
+            return new GProjectile();
+        }
+
+        public IEntity TotallyClone(object source)
+        {
+            return Clone(source);
         }
     }
 }

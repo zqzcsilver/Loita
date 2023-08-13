@@ -1,0 +1,6 @@
+Items: {
+	TestWand: {
+		DisplayName: Test Wand
+		Tooltip: ""
+	}
+}

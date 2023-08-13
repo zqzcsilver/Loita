@@ -3,7 +3,7 @@ using Loita.Utils;
 
 using Microsoft.Xna.Framework;
 
-namespace Loita.UI.UIContainers.StaffInfusionManager.UIElements
+namespace Loita.UI.UIContainers.WandInfusionManager.UIElements
 {
     internal class UIChoices : UIPanel
     {
