@@ -6,12 +6,13 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader.IO;
 
 namespace Loita.Items
 {
     internal class TestWand : WandBase
     {
-        public override int SlotCount => 10;
+        public override int SlotCount => 40;
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -52,6 +53,11 @@ namespace Loita.Items
             spellInfo.KnockbBack = knockback;
             InfusionSlot.Apply(spellInfo);
             return false;
+        }
+        public override void LoadData(TagCompound tag)
+        {
+            base.LoadData(tag);
+
         }
     }
 }

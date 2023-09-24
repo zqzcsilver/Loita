@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 
 namespace Loita.Components.LoitaComponents
 {
@@ -127,14 +128,22 @@ namespace Loita.Components.LoitaComponents
         public override void ReadOnBinary(BinaryReader br)
         {
             _slotSize = br.ReadInt32();
+            _activableSpace.Clear();
+            int i;
+            for (i = 0; i < _slotSize; i++)
+            {
+                _activableSpace.Add(null);
+            }
             int count = br.ReadInt32();
-            for (int i = 0; i < count; i++)
+            for (i = 0; i < count; i++)
             {
                 int index = br.ReadInt32();
                 var comp = (LoitaComponent)Activator.CreateInstance(Type.GetType(br.ReadString()), Entity);
                 comp.ReadOnBinary(br);
                 ChangeComponent(index, comp);
             }
+            i = 0;
+            InitActivableSpace(ref i);
         }
     }
 }

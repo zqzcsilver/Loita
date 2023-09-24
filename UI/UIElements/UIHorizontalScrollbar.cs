@@ -7,7 +7,7 @@ using Terraria.GameContent;
 
 namespace Loita.UI.UIElements
 {
-    internal class UIHorizontalScrollbar : UIPanel, IScrollbarBase
+    internal class UIHorizontalScrollbar : UIPanel, IScrollbar
     {
         private const int LEFT_HEIGHT = 1;
         private const int RIGHT_HEIGHT = 1;

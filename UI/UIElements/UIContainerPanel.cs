@@ -35,8 +35,8 @@ namespace Loita.UI.UIElements
         }
 
         private InnerPanel _innerPanel;
-        private IScrollbarBase _verticalScrollbar;
-        private IScrollbarBase _horizontalScrollbar;
+        private IScrollbar _verticalScrollbar;
+        private IScrollbar _horizontalScrollbar;
         private float verticalWheelValue;
 
         public float VerticalWheelValue
@@ -56,8 +56,8 @@ namespace Loita.UI.UIElements
         private Vector2 innerPanelMinLocation;
         private Vector2 innerPanelMaxLocation;
         public bool CanMove = false, CanMoveVerticalScrollbar = false, CanMoveHorizontalScrollbar = false;
-        public IScrollbarBase UIVerticalScrollbar => _verticalScrollbar;
-        public IScrollbarBase UIHorizontalScrollbar => _horizontalScrollbar;
+        public IScrollbar UIVerticalScrollbar => _verticalScrollbar;
+        public IScrollbar UIHorizontalScrollbar => _horizontalScrollbar;
         public List<BaseElement> Elements { get => _innerPanel.ChildrenElements; }
 
         public UIContainerPanel()
@@ -68,9 +68,9 @@ namespace Loita.UI.UIElements
             Info.SetMargin(4f);
         }
 
-        public void SetVerticalScrollbar(IScrollbarBase scrollbar) => _verticalScrollbar = scrollbar;
+        public void SetVerticalScrollbar(IScrollbar scrollbar) => _verticalScrollbar = scrollbar;
 
-        public void SetHorizontalScrollbar(IScrollbarBase scrollbar) => _horizontalScrollbar = scrollbar;
+        public void SetHorizontalScrollbar(IScrollbar scrollbar) => _horizontalScrollbar = scrollbar;
 
         public void SetVerticalWhell(float whell)
         {

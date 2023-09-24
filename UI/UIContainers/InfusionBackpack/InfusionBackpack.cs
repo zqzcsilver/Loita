@@ -255,7 +255,7 @@ namespace Loita.UI.UIContainers.InfusionBackpack
 
                 UIText count = new UIText("×1", Loita.DefaultFontSystem.GetFont(18f));
                 count.CenterX = new PositionStyle(0f, 0.75f);
-                count.CenterY = new PositionStyle(0f, 0.5f);
+                count.CenterY = new PositionStyle(0f, 0.45f);
                 takeOut.Register(count);
 
                 i++;
@@ -341,7 +341,7 @@ namespace Loita.UI.UIContainers.InfusionBackpack
 
                 UIText count = new UIText($"×{cp.Value.Count}", Loita.DefaultFontSystem.GetFont(18f));
                 count.CenterX = new PositionStyle(0f, 0.75f);
-                count.CenterY = new PositionStyle(0f, 0.5f);
+                count.CenterY = new PositionStyle(0f, 0.45f);
                 choice.Register(count);
 
                 i++;

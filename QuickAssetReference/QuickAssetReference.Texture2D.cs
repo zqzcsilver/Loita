@@ -7,9 +7,15 @@ public static class ModAssets_Texture2D
     public static Asset<Texture2D> BackpackAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(BackpackPath);
     public static Asset<Texture2D> BackpackImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(BackpackPath, AssetRequestMode.ImmediateLoad);
     public const string BackpackPath = "Backpack";
+    public static Asset<Texture2D> CreateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CreatePath);
+    public static Asset<Texture2D> CreateImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CreatePath, AssetRequestMode.ImmediateLoad);
+    public const string CreatePath = "Create";
     public static Asset<Texture2D> iconAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(iconPath);
     public static Asset<Texture2D> iconImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(iconPath, AssetRequestMode.ImmediateLoad);
     public const string iconPath = "icon";
+    public static Asset<Texture2D> RecipeAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(RecipePath);
+    public static Asset<Texture2D> RecipeImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(RecipePath, AssetRequestMode.ImmediateLoad);
+    public const string RecipePath = "Recipe";
     public static Asset<Texture2D> StaffUIAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(StaffUIPath);
     public static Asset<Texture2D> StaffUIImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(StaffUIPath, AssetRequestMode.ImmediateLoad);
     public const string StaffUIPath = "StaffUI";
@@ -22,6 +28,12 @@ public static class ModAssets_Texture2D
                 public static Asset<Texture2D> CLightPrefixAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CLightPrefixPath);
                 public static Asset<Texture2D> CLightPrefixImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CLightPrefixPath, AssetRequestMode.ImmediateLoad);
                 public const string CLightPrefixPath = "Components/LoitaComponents/Prefixes/CLightPrefix";
+                public static Asset<Texture2D> COnePenetrationPrefixAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(COnePenetrationPrefixPath);
+                public static Asset<Texture2D> COnePenetrationPrefixImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(COnePenetrationPrefixPath, AssetRequestMode.ImmediateLoad);
+                public const string COnePenetrationPrefixPath = "Components/LoitaComponents/Prefixes/COnePenetrationPrefix";
+                public static Asset<Texture2D> CUnlimitedPenetrationPrefixAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CUnlimitedPenetrationPrefixPath);
+                public static Asset<Texture2D> CUnlimitedPenetrationPrefixImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CUnlimitedPenetrationPrefixPath, AssetRequestMode.ImmediateLoad);
+                public const string CUnlimitedPenetrationPrefixPath = "Components/LoitaComponents/Prefixes/CUnlimitedPenetrationPrefix";
                 public static Asset<Texture2D> DoubleDamageAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(DoubleDamagePath);
                 public static Asset<Texture2D> DoubleDamageImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(DoubleDamagePath, AssetRequestMode.ImmediateLoad);
                 public const string DoubleDamagePath = "Components/LoitaComponents/Prefixes/DoubleDamage";
@@ -39,6 +51,9 @@ public static class ModAssets_Texture2D
                 public static Asset<Texture2D> CDoubleSpellAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CDoubleSpellPath);
                 public static Asset<Texture2D> CDoubleSpellImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CDoubleSpellPath, AssetRequestMode.ImmediateLoad);
                 public const string CDoubleSpellPath = "Components/LoitaComponents/Triggers/CDoubleSpell";
+                public static Asset<Texture2D> CQuadrupleSpellRandomPositionByMouseAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CQuadrupleSpellRandomPositionByMousePath);
+                public static Asset<Texture2D> CQuadrupleSpellRandomPositionByMouseImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CQuadrupleSpellRandomPositionByMousePath, AssetRequestMode.ImmediateLoad);
+                public const string CQuadrupleSpellRandomPositionByMousePath = "Components/LoitaComponents/Triggers/CQuadrupleSpellRandomPositionByMouse";
             }
 
         }

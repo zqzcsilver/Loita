@@ -71,4 +71,13 @@
 	<ItemGroup>
 	  <ModFile Remove="Components\LoitaComponents\Prefixes\DoubleDamage.cs" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Triggers\CQuadrupleSpellRandomPositionByMouse.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIElements\IScrollbar.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Prefixes\COnePenetrationPrefix.cs" />
+	</ItemGroup>
 </Project>

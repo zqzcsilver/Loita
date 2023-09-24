@@ -8,8 +8,6 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-using tModPorter.Rewriters;
-
 namespace Loita.Globals
 {
     internal class GItem : GlobalItem, IEntity
@@ -62,10 +60,16 @@ namespace Loita.Globals
                 for (int i = 0; i < count; i++)
                 {
                     var type = Type.GetType(reader.ReadString());
-                    var component = (IComponent)Activator.CreateInstance(type, this);
-                    if (component is IBinarySupport binary)
-                        binary.ReadOnBinary(reader);
-                    Entity.AddComponent(component);
+                    if (!Entity.HasComponent(type))
+                    {
+                        var component = (IComponent)Activator.CreateInstance(type, this);
+                        Entity.AddComponent(component);
+                    }
+                    else
+                    {
+                        if (Entity.GetComponent(type) is IBinarySupport binary)
+                            binary.ReadOnBinary(reader);
+                    }
                 }
             }
         }

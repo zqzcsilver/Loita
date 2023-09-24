@@ -60,7 +60,7 @@ namespace Loita
         /// <summary>
         /// 默认字体系统
         /// </summary>
-        public static FontSystem DefaultFontSystem => FontManager["Fonts/SourceHanSansHWSC_VF.ttf"];
+        public static FontSystem DefaultFontSystem => FontManager["Fonts/fusion-pixel-12px-proportional-zh_hans.ttf"];
 
         /// <summary>
         /// 默认字体

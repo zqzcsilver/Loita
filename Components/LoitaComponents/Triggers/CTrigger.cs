@@ -13,6 +13,11 @@ namespace Loita.Components.LoitaComponents
 
         public CInfusionSlot InfusionSlot => Entity.GetComponent<CInfusionSlot>();
 
+        public abstract int SlotCount
+        {
+            get;
+        }
+
         public CTrigger(IEntity entity) : base(entity)
         {
         }
@@ -32,6 +37,22 @@ namespace Loita.Components.LoitaComponents
             base.InitActivableSpace(ref index);
             ActivableSpace.Clear();
             index++;
+
+            var activableSpace = InfusionSlot.ActivableSpace;
+            while (index < activableSpace.Count)
+            {
+                var comp = activableSpace[index];
+                if (comp == null)
+                {
+                    index++;
+                    continue;
+                }
+                ActivableSpace.Add(comp);
+                comp.Parent = this;
+                comp.InitActivableSpace(ref index);
+                if (ActivableSpace.Count == SlotCount)
+                    return;
+            }
         }
     }
 }

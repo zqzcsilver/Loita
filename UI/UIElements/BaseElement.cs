@@ -149,6 +149,8 @@ namespace Loita.UI.UIElements
             /// </summary>
             public PositionStyle ButtomMargin = PositionStyle.Empty;
 
+            public SamplerState SamplerState = SamplerState.AnisotropicClamp;
+
             /// <summary>
             /// 是否隐藏溢出
             /// </summary>
@@ -457,7 +459,7 @@ namespace Loita.UI.UIElements
                 //关闭画笔
                 sb.End();
                 //启用画笔，传参：延迟绘制（纹理合批优化），alpha颜色混合模式，各向异性采样，不启用深度模式，UI大小矩阵
-                sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.AnisotropicClamp,
+                sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Info.SamplerState,
                     DepthStencilState.None, overflowHiddenRasterizerState, null, Terraria.Main.UIScaleMatrix);
                 //绘制自己
                 DrawSelf(sb);
@@ -476,7 +478,7 @@ namespace Loita.UI.UIElements
                 //修改GD剪切矩形为原剪切矩形与现剪切矩形的交集
                 gd.ScissorRectangle = Rectangle.Intersect(gd.ScissorRectangle, HiddenOverflowRectangle);
                 //启用画笔，传参：延迟绘制（纹理合批优化），alpha颜色混合模式，各向异性采样，不启用深度模式，UI大小矩阵
-                sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.AnisotropicClamp,
+                sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Info.SamplerState,
                     DepthStencilState.None, overflowHiddenRasterizerState, null, Main.UIScaleMatrix);
             }
             //绘制子元素
@@ -491,7 +493,7 @@ namespace Loita.UI.UIElements
                 //将剪切矩形换回原剪切矩形
                 gd.ScissorRectangle = scissorRectangle;
                 //启用画笔
-                sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.None, overflowHiddenRasterizerState, null, Main.UIScaleMatrix);
+                sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Info.SamplerState, DepthStencilState.None, overflowHiddenRasterizerState, null, Main.UIScaleMatrix);
             }
         }
         /// <summary>

@@ -46,8 +46,8 @@ namespace Loita.Components.LoitaComponents
         public virtual void DrawTips(SpriteBatch sb, Vector2 startPos, Vector2 containerSize, out Vector2 size)
         {
             size = Vector2.Zero;
-            var nameFont = Loita.DefaultFontSystem.GetFont(30f);
-            var desFont = Loita.DefaultFontSystem.GetFont(20f);
+            var nameFont = Loita.DefaultFontSystem.GetFont(38f);
+            var desFont = Loita.DefaultFontSystem.GetFont(24f);
             var name = StringUtil.GetWordWrapString1(Name, nameFont, containerSize.X);
             var description = StringUtil.GetWordWrapString1(Description, desFont, containerSize.X);
             var nameSize = nameFont.MeasureString(name);

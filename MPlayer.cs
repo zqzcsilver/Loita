@@ -51,6 +51,8 @@ namespace Loita
                 GainComponent(new CLightPrefix(null));
                 GainComponent(new DoubleDamage(null));
                 GainComponent(new CTestSpell(null));
+                GainComponent(new CQuadrupleSpellRandomPositionByMouse(null));
+                GainComponent(new COnePenetrationPrefix(null));
             }
             base.OnEnterWorld();
         }

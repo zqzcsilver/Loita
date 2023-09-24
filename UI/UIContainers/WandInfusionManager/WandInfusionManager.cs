@@ -114,6 +114,7 @@ namespace Loita.UI.UIContainers.WandInfusionManager
             componentInfo.Register(componentInfoContainer);
 
             _tips = new UITips((LoitaComponent)null);
+            _tips.Info.SamplerState = SamplerState.PointClamp;
             componentInfoContainer.AddElement(_tips);
 
             verticalScrollbar = new UIVerticalScrollbar();
@@ -301,6 +302,7 @@ namespace Loita.UI.UIContainers.WandInfusionManager
                     image.Info.Height.Pixel /= scale;
                     image.Info.Left.SetValue(PositionStyle.Half - image.Info.Width / 2f);
                     image.Info.Top.SetValue(PositionStyle.Half - image.Info.Height / 2f);
+                    image.Info.SamplerState = SamplerState.PointClamp;
                     defaultChoices.Register(image);
                 }
             }
