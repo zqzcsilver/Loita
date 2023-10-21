@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Loita.UI.UIContainers.DebugUI.DebugItems;
 using Loita.UI.UIElements;
 
 using Microsoft.Xna.Framework;
@@ -13,6 +14,8 @@ namespace Loita.UI
 {
     internal class LoitaUISystem
     {
+        public static LoitaUISystem Instance => Loita.UISystem;
+
         /// <summary>
         /// 存放着所有<see cref="UIContainerElement"/>实例的字典
         /// </summary>
@@ -84,6 +87,7 @@ namespace Loita.UI
         /// </summary>
         public void Load()
         {
+            LoggerItem.WriteLine($"[Loita:UI System]加载中...");
             var containers = from c in GetType().Assembly.GetTypes()
                              where !c.IsAbstract && c.IsSubclassOf(typeof(UIContainerElement))
                              select c;
@@ -94,6 +98,7 @@ namespace Loita.UI
                 if (element.AutoLoad)
                     Register(element);
             }
+            LoggerItem.WriteLine($"[Loita:UI System]加载完毕");
         }
 
         /// <summary>
@@ -227,10 +232,13 @@ namespace Loita.UI
         {
             if (element == null || Elements.ContainsKey(name) || CallOrder.Contains(name))
                 return false;
+
             Elements.Add(name, element);
             CallOrder.Add(element.Name);
             element.OnInitialization();
             element.Calculation();
+
+            LoggerItem.WriteLine($"[Loita:UI System]UI页 {name} 注册完毕");
             return true;
         }
 
@@ -245,6 +253,7 @@ namespace Loita.UI
                 return false;
             Elements.Remove(name);
             CallOrder.Remove(name);
+            LoggerItem.WriteLine($"[Loita:UI System]UI页 {name} 被移除");
             return true;
         }
 
@@ -270,6 +279,7 @@ namespace Loita.UI
                 return true;
             CallOrder.Remove(name);
             CallOrder.Insert(0, name);
+            LoggerItem.WriteLine($"[Loita:UI System]UI页 {name} 被置顶");
             return true;
         }
 
@@ -290,6 +300,7 @@ namespace Loita.UI
             CallOrder.Remove(name2);
             CallOrder.Insert(index1, name2);
             CallOrder.Insert(index2, name1);
+            LoggerItem.WriteLine($"[Loita:UI System]UI页 {name1} 与 {name2} 交换UI层");
             return true;
         }
 
@@ -311,6 +322,7 @@ namespace Loita.UI
             {
                 ElementsCache[c].Info.IsVisible = false;
             }
+            LoggerItem.WriteLine($"[Loita:UI System]关闭所有UI页");
         }
     }
 }

@@ -28,16 +28,13 @@ namespace Loita.UI.UIElements
             {
                 Progression.WaitToValue = 0f;
             };
-            Progression.OnValueChange += progression =>
-            {
-                PanelColor = Color.Lerp(PrimaryColor, LightColor, Progression.Value);
-            };
         }
 
         public override void Update(GameTime gt)
         {
             base.Update(gt);
             Progression.Update(gt);
+            PanelColor = Color.Lerp(PrimaryColor, LightColor, Progression.Value);
         }
     }
 }

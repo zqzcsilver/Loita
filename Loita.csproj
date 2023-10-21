@@ -43,6 +43,7 @@
 	<ItemGroup>
 	  <Folder Include="Components\CommonComponents\" />
 	  <Folder Include="UI\UIContainers\InfusionBackpack\Images\" />
+	  <Folder Include="UI\UIContainers\RecipeUI\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ModFile Remove="UI\UIContainers\InfusionBackpack\FilterCondition.cs" />
@@ -79,5 +80,53 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ModFile Remove="Components\LoitaComponents\Prefixes\COnePenetrationPrefix.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="RecipeSystem\RecipeCondition.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="RecipeSystem\RecipeItem.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="RecipeSystem\Results\RecipeResult.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="RecipeSystem\Results\LCResult.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="RecipeSystem\Conditions\LCCondition.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="RecipeSystem\RecipeItems\LCRecipeItem.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="RecipeSystem\RecipeSystem.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIContainers\DebugUI\DebugContainer.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIContainers\DebugUI\DebugItems\DebugItemBase.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIContainers\DebugUI\DebugItems\LoggerItem.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIContainers\DebugUI\DebugItems\InfusionBackpackItem.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Utils\InstanceManager.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Utils\Expands\TextureExpand.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Utils\Expands\GameTimeExpand.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIElements\UITextPlus.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Fonts\FusionPixel12.ttf" />
 	</ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 ﻿using Loita.Components.LoitaComponents;
 using Loita.Components.LoitaComponents.Prefixes;
 using Loita.Components.LoitaComponents.Spells;
+using Loita.ModPlayers;
 using Loita.QuickAssetReference;
 using Loita.UI.UIContainers.WandInfusionManager.UIElements;
 using Loita.UI.UIElements;

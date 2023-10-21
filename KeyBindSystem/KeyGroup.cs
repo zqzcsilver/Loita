@@ -1,0 +1,245 @@
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Text;
+
+using Loita.UI;
+
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+
+using Terraria;
+
+namespace Loita.KeyBindSystem
+{
+    internal delegate void KeyHandle(KeyGroup keyGroup);
+
+    internal class KeyGroup
+    {
+        public event KeyHandle OnPressed;
+
+        public event KeyHandle OnReleased;
+
+        public string Name;
+        private List<Keys> _keys;
+        private bool _bindMouseLeft = false;
+        private bool _bindMouseRight = false;
+        private bool _bindMouseMiddle = false;
+        private bool _canCloseResetKey = false;
+        private KeyCooldown _keyCoolDown;
+        public bool IsPressed { get; private set; }
+        private bool _pressCache = false;
+        public bool IsClick = false;
+        public bool IsDoubleClick = false;
+        public bool IsDown = false;
+        public bool IsUp = false;
+
+        public bool NeedResetKey
+        {
+            get => _needResetKey;
+            set
+            {
+                _needResetKey = value;
+                if (_needResetKey)
+                {
+                    _bindMouseLeft = false;
+                    _bindMouseRight = false;
+                    _bindMouseMiddle = false;
+                    _keys.Clear();
+                }
+            }
+        }
+
+        private bool _needResetKey = false;
+        public bool NeedBindMouse = false;
+        public bool NeedBindKeys = true;
+
+        public KeyGroup()
+        {
+            Name = string.Empty;
+            _keys = new List<Keys>();
+            _keyCoolDown = new KeyCooldown(() => IsPressed);
+        }
+
+        public KeyGroup(string name)
+        {
+            Name = name;
+            _keys = new List<Keys>();
+            _keyCoolDown = new KeyCooldown(() => IsPressed);
+        }
+
+        public KeyGroup(string name, List<Keys> keys)
+        {
+            Name = name;
+            _keys = new List<Keys>(keys);
+            _keyCoolDown = new KeyCooldown(() => IsPressed);
+        }
+
+        public void Update(GameTime gt)
+        {
+            IsClick = false;
+            IsDoubleClick = false;
+            IsDown = false;
+            IsUp = false;
+            if (Terraria.GameInput.PlayerInput.WritingText)
+                return;
+            if (NeedResetKey)
+            {
+                var pks = Main.keyState.GetPressedKeys();
+                if ((NeedBindKeys && pks.Length > 0) || (NeedBindMouse &&
+                    (Main.mouseLeft || Main.mouseRight || Main.mouseMiddle)))
+                {
+                    if (NeedBindMouse)
+                    {
+                        if (Main.mouseLeft)
+                            _bindMouseLeft = true;
+                        if (Main.mouseRight)
+                            _bindMouseRight = true;
+                        if (Main.mouseMiddle)
+                            _bindMouseMiddle = true;
+                    }
+                    foreach (var k in pks)
+                    {
+                        if (!_keys.Contains(k))
+                            _keys.Add(k);
+                    }
+                    _canCloseResetKey = true;
+                }
+                else if (_canCloseResetKey)
+                {
+                    NeedResetKey = false;
+                    _canCloseResetKey = false;
+                }
+            }
+            else
+            {
+                IsPressed = false;
+                if (NeedBindMouse)
+                {
+                    if (_bindMouseLeft)
+                    {
+                        IsPressed = Main.mouseLeft;
+                        if (!IsPressed)
+                            return;
+                    }
+                    if (_bindMouseRight)
+                    {
+                        IsPressed = Main.mouseRight;
+                        if (!IsPressed)
+                            return;
+                    }
+                    if (_bindMouseMiddle)
+                    {
+                        IsPressed = Main.mouseMiddle;
+                        if (!IsPressed)
+                            return;
+                    }
+                }
+                if (NeedBindKeys)
+                {
+                    IsPressed = true;
+                    foreach (var k in _keys)
+                    {
+                        if (!Main.keyState.IsKeyDown(k))
+                            IsPressed = false;
+                        if (!IsPressed)
+                            break;
+                    }
+                }
+                if (_pressCache != IsPressed)
+                {
+                    _pressCache = IsPressed;
+                    if (IsPressed)
+                    {
+                        IsDown = true;
+                        if (_keyCoolDown.IsCoolDown())
+                        {
+                            IsClick = true;
+                            OnPressed?.Invoke(this);
+                        }
+                        else
+                        {
+                            IsDoubleClick = true;
+                            _keyCoolDown.ResetCoolDown();
+                        }
+                    }
+                    else
+                    {
+                        IsUp = true;
+                        OnReleased?.Invoke(this);
+                    }
+                }
+            }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            if (NeedBindMouse)
+            {
+                if (_bindMouseLeft)
+                {
+                    stringBuilder.Append("MouseLeft+");
+                }
+                if (_bindMouseRight)
+                {
+                    stringBuilder.Append("MouseRight+");
+                }
+                if (_bindMouseMiddle)
+                {
+                    stringBuilder.Append("MouseMiddle+");
+                }
+            }
+            if (NeedBindKeys)
+            {
+                foreach (var k in _keys)
+                {
+                    stringBuilder.Append($"{k}+");
+                }
+            }
+            if (stringBuilder.Length > 1)
+                stringBuilder.Remove(stringBuilder.Length - 1, 1);
+            return stringBuilder.ToString();
+        }
+
+        public void Save(BinaryWriter binaryWriter)
+        {
+            binaryWriter.Write(NeedBindMouse);
+            if (NeedBindMouse)
+            {
+                binaryWriter.Write(_bindMouseLeft);
+                binaryWriter.Write(_bindMouseMiddle);
+                binaryWriter.Write(_bindMouseRight);
+            }
+            binaryWriter.Write(NeedBindKeys);
+            if (NeedBindKeys)
+            {
+                binaryWriter.Write(_keys.Count);
+                foreach (var k in _keys)
+                {
+                    binaryWriter.Write((int)k);
+                }
+            }
+        }
+
+        public void Read(BinaryReader binaryReader)
+        {
+            NeedBindMouse = binaryReader.ReadBoolean();
+            if (NeedBindMouse)
+            {
+                _bindMouseLeft = binaryReader.ReadBoolean();
+                _bindMouseMiddle = binaryReader.ReadBoolean();
+                _bindMouseRight = binaryReader.ReadBoolean();
+            }
+            NeedBindKeys = binaryReader.ReadBoolean();
+            if (NeedBindKeys)
+            {
+                _keys.Clear();
+                int length = binaryReader.ReadInt32();
+                for (int i = 0; i < length; i++)
+                {
+                    _keys.Add((Keys)binaryReader.ReadInt32());
+                }
+            }
+        }
+    }
+}

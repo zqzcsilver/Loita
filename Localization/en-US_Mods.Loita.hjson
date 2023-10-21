@@ -3,4 +3,25 @@ Items: {
 		DisplayName: Test Wand
 		Tooltip: ""
 	}
+
+	Loita: {
+		Items: {
+			TestWand: {
+				DisplayName: Loita. Items. Test Wand
+				Tooltip: ""
+			}
+
+			TestWand1: {
+				DisplayName: Loita. Items. Test Wand1
+				Tooltip: ""
+			}
+		}
+	}
+
+	TestWand1: {
+		DisplayName: Test Wand1
+		Tooltip: ""
+	}
 }
+
+"Keybinds.Loita Console.DisplayName": Loita  Console

@@ -29,12 +29,17 @@ namespace Loita.Components
             var nameSize = nameFont.MeasureString(name);
             var desSize = desFont.MeasureString(description);
 
-            size.X = containerSize.X;
+            if (nameSize.X >= containerSize.X || desSize.X >= containerSize.X)
+                size.X = containerSize.X;
+            else
+                size.X = Math.Max(nameSize.X, desSize.X);
             size.Y = nameSize.Y + desSize.Y;
 
-            sb.DrawString(nameFont, name, startPos, Color.White);
+            sb.DrawString(nameFont, name, startPos, Color.White, null, 0f,
+                default, 0f, 0f, 0f, TextStyle.None, FontSystemEffect.Stroked);
             startPos.Y += nameSize.Y;
-            sb.DrawString(desFont, description, startPos, Color.White);
+            sb.DrawString(desFont, description, startPos, Color.White, null, 0f,
+                default, 0f, 0f, 0f, TextStyle.None, FontSystemEffect.Stroked);
         }
     }
 }

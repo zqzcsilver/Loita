@@ -8,6 +8,7 @@ namespace Loita.Utils
 {
     internal class BinaryProcessed
     {
+        public static BinaryProcessed Instance => Loita.BinaryProcessed;
         private Dictionary<Type, Action<BinaryWriter, object, Type>> binaryWriterProcessed;
         private Dictionary<Type, Func<BinaryReader, Type, object>> binaryReaderProcessed;
 

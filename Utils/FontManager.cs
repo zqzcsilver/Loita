@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 using FontStashSharp;
+
+using Loita.UI.UIContainers.DebugUI.DebugItems;
 
 namespace Loita.Utils
 {
@@ -21,6 +24,8 @@ namespace Loita.Utils
                 FontSystem fontSystem = new FontSystem();
                 fontSystem.AddFont(Loita.Instance.GetFileBytes(path));
                 _fontSystemCache.Add(path, fontSystem);
+                var fontName = Path.GetFileNameWithoutExtension(path);
+                LoggerItem.WriteLine($"[Loita:Font Manager]字体 [TextDrawer,Text='{fontName}',Font='{fontName}'] 注册完毕");
             }
             return _fontSystemCache[path];
         }

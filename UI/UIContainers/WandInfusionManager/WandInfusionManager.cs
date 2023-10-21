@@ -1,6 +1,7 @@
 ﻿using Loita.Components;
 using Loita.Components.LoitaComponents;
 using Loita.Globals;
+using Loita.KeyBindSystem;
 using Loita.QuickAssetReference;
 using Loita.UI.UIContainers.UIElements;
 using Loita.UI.UIContainers.WandInfusionManager.UIElements;
@@ -143,8 +144,13 @@ namespace Loita.UI.UIContainers.WandInfusionManager
         public override void PreUpdate(GameTime gt)
         {
             base.PreUpdate(gt);
-
-            if (Main.keyState.IsKeyDown(Keys.I) && Main.HoverItem != null && Main.HoverItem.type != ItemID.None &&
+            bool keyPressed = KeyGroupManager.Instance.GetKeyGroup("Open Wand Infusion Manager").IsClick;
+            if (keyPressed && IsVisible)
+            {
+                Close();
+                return;
+            }
+            if (keyPressed && Main.HoverItem != null && Main.HoverItem.type != ItemID.None &&
                 Main.HoverItem.TryGetGlobalItem(out GItem gitem) && gitem.Entity.HasComponent<CInfusionSlot>() && !IsVisible)
             {
                 if (gitem.OriginalItem == null)
@@ -157,8 +163,6 @@ namespace Loita.UI.UIContainers.WandInfusionManager
                         Show(ngitem, TextureAssets.Item[gitem.OriginalItem.type].Value);
                 }
             }
-            if (Main.keyState.IsKeyDown(Keys.N) && IsVisible)
-                Close();
         }
 
         public void ResetInfusions(int index = -1)

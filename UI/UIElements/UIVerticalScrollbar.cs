@@ -100,7 +100,8 @@ namespace Loita.UI.UIElements
         public override void Update(GameTime gt)
         {
             base.Update(gt);
-            isMouseHover |= BindElement.GetCanHitBox().Contains(Main.MouseScreen.ToPoint());
+            if (BindElement != null)
+                isMouseHover |= BindElement.GetCanHitBox().Contains(Main.MouseScreen.ToPoint());
             if (AlwaysOnLight)
                 alpha = 1f;
             else
