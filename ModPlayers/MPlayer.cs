@@ -1,12 +1,17 @@
 ﻿using Loita.Components;
 using Loita.Components.LoitaComponents;
+using Loita.Components.LoitaComponents.Prefixes;
+using Loita.Components.LoitaComponents.Triggers;
 using Loita.Globals;
+using Loita.Items;
+using Loita.UI.UIContainers.InfusionBackpack;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -36,6 +41,10 @@ namespace Loita.ModPlayers
             //Loita.RecipeSystem.Register(recipeItem);
 
             //Loita.RecipeSystem.ForEach(r => r.Apply());
+            Item.NewItem(Player.GetSource_FromThis(),
+                Player.Center - new Microsoft.Xna.Framework.Vector2(200f, 0f),
+                ComponentAcquirer.GetItemID<DoubleDamage>(), 10);
+            //var item = Player.QuickSpawnItemDirect(Player.GetSource_FromThis(), ModContent.ItemType<ComponentAcquirer>(), 10);
             base.OnEnterWorld();
         }
 
@@ -43,6 +52,9 @@ namespace Loita.ModPlayers
         {
             if (component == null)
                 return;
+
+            if (InfusionBackpack.Instance.IsVisible)
+                InfusionBackpack.Instance.ResetInfusions();
 
             var funcName = nameof(GainComponent);
             IAmEntity.Call(funcName, component);
@@ -107,6 +119,9 @@ namespace Loita.ModPlayers
 
         public void GainComponents(Type t, int count = 1)
         {
+            if (InfusionBackpack.Instance.IsVisible)
+                InfusionBackpack.Instance.ResetInfusions();
+
             var component = (LoitaComponent)Activator.CreateInstance(t, new object[] { null });
 
             var funcName = nameof(GainComponents);
@@ -206,12 +221,17 @@ namespace Loita.ModPlayers
                 else
                     _componentCounter.Add(type, 1);
             }
+            if (InfusionBackpack.Instance.IsVisible)
+                InfusionBackpack.Instance.ResetInfusions();
         }
 
         public void RemoveComponents<T>(int count = 1) => RemoveComponents(typeof(T), count);
 
         public void RemoveComponents(Type type, int count = 1)
         {
+            if (InfusionBackpack.Instance.IsVisible)
+                InfusionBackpack.Instance.ResetInfusions();
+
             var funcName = nameof(RemoveComponents);
             IAmEntity.Call(funcName, type, count);
 

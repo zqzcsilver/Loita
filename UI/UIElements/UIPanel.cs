@@ -15,7 +15,10 @@ namespace Loita.UI.UIElements
         private Vector2 startPoint = Vector2.Zero;
         public (bool LeftBorder, bool TopBorder, bool RightBorder, bool BottomBorder) ShowBorder = (true, true, true, true);
         public int BorderWidth = 2;
-
+        public UIPanel()
+        {
+            Info.SetMargin(2f);
+        }
         public override void LoadEvents()
         {
             base.LoadEvents();
@@ -34,11 +37,6 @@ namespace Loita.UI.UIElements
             };
         }
 
-        public override void OnInitialization()
-        {
-            base.OnInitialization();
-            Info.SetMargin(2f);
-        }
 
         public override void Calculation()
         {

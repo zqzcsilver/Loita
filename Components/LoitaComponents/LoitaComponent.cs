@@ -1,14 +1,17 @@
 ﻿using FontStashSharp;
 
-using Loita.QuickAssetReference;
 using Loita.Utils;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using ReLogic.Content;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
+
+using Terraria.ModLoader;
 
 namespace Loita.Components.LoitaComponents
 {
@@ -22,8 +25,8 @@ namespace Loita.Components.LoitaComponents
         public virtual int Index { get; set; }
         public virtual LoitaComponent Parent { get; set; }
 
-        public virtual Texture2D Texture => ModAssets_Texture2D.Images.CBlockImmediateAsset.Value;
-
+        public virtual Texture2D Texture => ModContent.Request<Texture2D>(TexturePath, AssetRequestMode.ImmediateLoad).Value;
+        public virtual string TexturePath => GetType().FullName.Replace('.', '/');
         public virtual string Name => "Loita Component";
 
         public virtual string Description => "This is a Loita Component";

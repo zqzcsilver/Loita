@@ -11,6 +11,7 @@ namespace Loita.RecipeSystem.Conditions
 {
     internal abstract class LCCondition : RecipeCondition
     {
+        public abstract Type LCType { get; }
     }
 
     internal class LCCondition<T> : LCCondition where T : LoitaComponent
@@ -29,6 +30,8 @@ namespace Loita.RecipeSystem.Conditions
             get => count;
             set => count = Math.Max(0, value);
         }
+
+        public override Type LCType => typeof(T);
 
         private int count = 1;
         private T _component;

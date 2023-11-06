@@ -20,33 +20,17 @@
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
-	  <ModFile Remove="UI\LoitaUISystem.cs" />
-	</ItemGroup>
-	<ItemGroup>
 	  <ModFile Remove="IBinarySupport.cs" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ModFile Remove="Components\IInfusion.cs" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ModFile Remove="UI\UIElements\UITextButtonPlus.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ModFile Remove="UI\UIContainers\WandInfusionManager\UIElements\UIChoices.cs" />
-	</ItemGroup>
-	<ItemGroup>
 	  <Content Include="Fonts\SourceHanSansHWSC_VF.ttf" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ModFile Remove="UI\UIContainers\InfusionBackpack\InfusionBackpack.cs" />
-	</ItemGroup>
-	<ItemGroup>
 	  <Folder Include="Components\CommonComponents\" />
-	  <Folder Include="UI\UIContainers\InfusionBackpack\Images\" />
-	  <Folder Include="UI\UIContainers\RecipeUI\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ModFile Remove="UI\UIContainers\InfusionBackpack\FilterCondition.cs" />
+	  <Folder Include="DesignDraft\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ModFile Remove=".gitignore" />
@@ -55,16 +39,10 @@
 	  <ModFile Remove="Components\CInfusion.cs" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ModFile Remove="UI\UIContainers\UIElements\UITips.cs" />
-	</ItemGroup>
-	<ItemGroup>
 	  <ModFile Remove="Globals\GItem.cs" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ModFile Remove="Items\WandBase.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ModFile Remove="UI\UIContainers\WandInfusionManager\WandInfusionManager.cs" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ModFile Remove="Items\TestWand.cs" />
@@ -74,9 +52,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ModFile Remove="Components\LoitaComponents\Triggers\CQuadrupleSpellRandomPositionByMouse.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ModFile Remove="UI\UIElements\IScrollbar.cs" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ModFile Remove="Components\LoitaComponents\Prefixes\COnePenetrationPrefix.cs" />
@@ -103,18 +78,6 @@
 	  <ModFile Remove="RecipeSystem\RecipeSystem.cs" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ModFile Remove="UI\UIContainers\DebugUI\DebugContainer.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ModFile Remove="UI\UIContainers\DebugUI\DebugItems\DebugItemBase.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ModFile Remove="UI\UIContainers\DebugUI\DebugItems\LoggerItem.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ModFile Remove="UI\UIContainers\DebugUI\DebugItems\InfusionBackpackItem.cs" />
-	</ItemGroup>
-	<ItemGroup>
 	  <ModFile Remove="Utils\InstanceManager.cs" />
 	</ItemGroup>
 	<ItemGroup>
@@ -124,9 +87,9 @@
 	  <ModFile Remove="Utils\Expands\GameTimeExpand.cs" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ModFile Remove="UI\UIElements\UITextPlus.cs" />
+	  <ModFile Remove="Fonts\FusionPixel12.ttf" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ModFile Remove="Fonts\FusionPixel12.ttf" />
+	  <ModFile Remove="Items\ComponentAcquirer.cs" />
 	</ItemGroup>
 </Project>

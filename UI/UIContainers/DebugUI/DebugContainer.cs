@@ -3,6 +3,7 @@ using Loita.UI.UIContainers.DebugUI.DebugItems;
 using Loita.UI.UIElements;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,14 @@ namespace Loita.UI.UIContainers.DebugUI
 {
     internal class DebugContainer : UIContainerElement
     {
+        public const string OPEN_HOT_KEY = "Open Debug Panel";
+
+        public override void Load()
+        {
+            Loita.KeyGroupManager.RegisterKeyGroup(new KeyGroup(OPEN_HOT_KEY, new List<Keys>() { Keys.U }));
+            base.Load();
+        }
+
         public override void OnInitialization()
         {
             base.OnInitialization();
@@ -97,8 +106,7 @@ namespace Loita.UI.UIContainers.DebugUI
         public override void PreUpdate(GameTime gt)
         {
             base.PreUpdate(gt);
-            bool keyPressed = KeyGroupManager.Instance.GetKeyGroup("Open Debug Panel").IsClick;
-            if (keyPressed)
+            if (KeyGroupManager.Instance.GetKeyGroup(OPEN_HOT_KEY).IsClick)
             {
                 if (IsVisible)
                     Close();

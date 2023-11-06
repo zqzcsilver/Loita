@@ -9,8 +9,6 @@ namespace Loita.Components.LoitaComponents.Triggers
 {
     internal class CQuadrupleSpellRandomPositionByMouse : CTrigger
     {
-        public override Texture2D Texture => ModAssets_Texture2D.Components.LoitaComponents.Triggers.CQuadrupleSpellRandomPositionByMouseImmediateAsset.Value;
-
         public override string Name => "四重释放-鼠标随机";
 
         public override string Description => "以鼠标位置作为原点，随机取原点周围位置作为法术发射位置，并以原点方向作为法术发射方向。重复四次。";

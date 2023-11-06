@@ -32,5 +32,9 @@
         {
             Info.IsVisible = false;
         }
+
+        public virtual void Load()
+        {
+        }
     }
 }

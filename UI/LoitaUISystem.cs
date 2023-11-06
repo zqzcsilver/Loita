@@ -96,7 +96,10 @@ namespace Loita.UI
             {
                 element = (UIContainerElement)Activator.CreateInstance(c);
                 if (element.AutoLoad)
+                {
+                    element.Load();
                     Register(element);
+                }
             }
             LoggerItem.WriteLine($"[Loita:UI System]加载完毕");
         }

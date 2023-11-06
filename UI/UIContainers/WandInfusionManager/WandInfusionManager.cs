@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using System;
+using System.Collections.Generic;
 
 using Terraria;
 using Terraria.GameContent;
@@ -21,6 +22,8 @@ namespace Loita.UI.UIContainers.WandInfusionManager
 {
     internal class WandInfusionManager : UIContainerElement
     {
+        public const string OPEN_HOT_KEY = "Open Wand Infusion Manager";
+
         public static WandInfusionManager Instance =>
             (WandInfusionManager)Loita.UISystem.Elements["Loita.UI.UIContainers.WandInfusionManager.WandInfusionManager"];
 
@@ -51,6 +54,12 @@ namespace Loita.UI.UIContainers.WandInfusionManager
 
         private UIChoices defaultChoices;
         private UITips _tips;
+
+        public override void Load()
+        {
+            base.Load();
+            Loita.KeyGroupManager.RegisterKeyGroup(new KeyGroup(OPEN_HOT_KEY, new List<Keys>() { Keys.I }));
+        }
 
         public override void OnInitialization()
         {

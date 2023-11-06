@@ -29,5 +29,10 @@ namespace Loita.Utils
         {
             return instances.GetOrAdd(typeof(T), new List<object>()).ConvertAll<T>(new Converter<object, T>(obj => (T)obj));
         }
+
+        public static T GetTypeInstance(Type t)
+        {
+            return (T)(instances.TryGetValue(typeof(T), out var objs) ? objs.Find(o => o.GetType() == t) : null);
+        }
     }
 }

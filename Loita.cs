@@ -1,15 +1,18 @@
 using FontStashSharp;
 
 using Loita.Components.LoitaComponents;
+using Loita.Components.LoitaComponents.Spells;
+using Loita.Components.LoitaComponents.Triggers;
+using Loita.Items;
 using Loita.KeyBindSystem;
+using Loita.RecipeSystem.Conditions;
+using Loita.RecipeSystem.RecipeItems;
+using Loita.RecipeSystem.Results;
 using Loita.UI;
 using Loita.UI.UIContainers.DebugUI.DebugItems;
 using Loita.Utils;
 
-using Microsoft.Xna.Framework.Input;
-
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 using Terraria;
@@ -97,6 +100,14 @@ namespace Loita
             LoggerItem.WriteLine($"[Loita:Recipe System]服务注册完毕");
             _keyGroupManager = new KeyGroupManager();
             LoggerItem.WriteLine($"[Loita:Key Group Manager]服务注册完毕");
+
+            for (int i = 0; i < 100; i++)
+            {
+                LCRecipeItem recipeItem = new LCRecipeItem();
+                recipeItem.AddCondition(new LCCondition<CDoubleSpell>());
+                recipeItem.AddResult(new LCResult<CTestSpell>());
+                RecipeSystem.Register(recipeItem);
+            }
         }
 
         public override void Load()
@@ -106,9 +117,6 @@ namespace Loita
             if (Main.netMode != NetmodeID.Server)
             {
                 system.Load();
-
-                KeyGroupManager.RegisterKeyGroup(new KeyGroup("Open Wand Infusion Manager", new List<Keys>() { Keys.I }));
-                KeyGroupManager.RegisterKeyGroup(new KeyGroup("Open Debug Panel", new List<Keys>() { Keys.U }));
                 loadComponentInstance();
             }
         }
@@ -124,6 +132,10 @@ namespace Loita
                 var instance = (LoitaComponent)Activator.CreateInstance(ctype, new object[] { null });
                 InstanceManager<LoitaComponent>.RegisterInstance(instance);
                 LoggerItem.WriteLine($"[Loita:Instance Manager]组件 {instance.Name} 注册完毕");
+
+                ComponentAcquirer ca = new ComponentAcquirer();
+                ca.ComponentType = ctype;
+                AddContent(ca);
             }
             LoggerItem.WriteLine($"[Loita:Instance Manager]Loita Component 组件实例注册完毕");
         }

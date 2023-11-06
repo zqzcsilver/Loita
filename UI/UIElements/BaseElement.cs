@@ -44,6 +44,18 @@ namespace Loita.UI.UIElements
                 Percent = percent;
             }
 
+            public void SetFull()
+            {
+                Pixel = 0f;
+                Percent = 1f;
+            }
+
+            public void SetHalf()
+            {
+                Pixel = 0f;
+                Percent = 0.5f;
+            }
+
             /// <summary>
             /// 获取基于输入参数的精确坐标
             /// </summary>
@@ -230,6 +242,28 @@ namespace Loita.UI.UIElements
                 RightMargin.Pixel = pixel;
                 TopMargin.Pixel = pixel;
                 ButtomMargin.Pixel = pixel;
+            }
+
+            public void SetToCenter() => SetCenter(PositionStyle.Half, PositionStyle.Half);
+
+            public void SetCenter(PositionStyle centerX, PositionStyle centerY)
+            {
+                Left.SetValue(centerX - Width / 2f);
+                Top.SetValue(centerY - Height / 2f);
+            }
+
+            public void SetToRight() => SetRight(PositionStyle.Full);
+
+            public void SetRight(PositionStyle right)
+            {
+                Left.SetValue(right - Width);
+            }
+
+            public void SetToBottom() => SetBottom(PositionStyle.Full);
+
+            public void SetBottom(PositionStyle bottom)
+            {
+                Top.SetValue(bottom - Height);
             }
         }
 
@@ -441,6 +475,7 @@ namespace Loita.UI.UIElements
             if (IsVisible)
                 Events.Update(this, gt);
         }
+
         /// <summary>
         /// 绘制
         /// </summary>
@@ -496,6 +531,7 @@ namespace Loita.UI.UIElements
                 sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Info.SamplerState, DepthStencilState.None, overflowHiddenRasterizerState, null, Main.UIScaleMatrix);
             }
         }
+
         /// <summary>
         /// 绘制自己
         /// </summary>

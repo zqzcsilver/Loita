@@ -8,6 +8,8 @@ namespace Loita.UI.UIContainers.InfusionBackpack
     {
         private Dictionary<string, bool> conditions = new Dictionary<string, bool>();
 
+        public event Action<string> OnConditionChanged;
+
         public bool this[string key]
         {
             get => conditions.ContainsKey(key) && conditions[key];
@@ -17,6 +19,7 @@ namespace Loita.UI.UIContainers.InfusionBackpack
                     conditions[key] = value;
                 else
                     conditions.Add(key, value);
+                OnConditionChanged?.Invoke(key);
             }
         }
 

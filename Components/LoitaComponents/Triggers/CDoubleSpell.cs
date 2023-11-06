@@ -10,8 +10,6 @@ namespace Loita.Components.LoitaComponents.Triggers
 {
     internal class CDoubleSpell : CTrigger
     {
-        public override Texture2D Texture => ModAssets_Texture2D.Components.LoitaComponents.Triggers.CDoubleSpellImmediateAsset.Value;
-
         public override string Name => "双重释放";
 
         public override string Description => "能够以夹角为10°的角度(调用链上每有一个双重释放法术则角度/2)同时释放两个法术";

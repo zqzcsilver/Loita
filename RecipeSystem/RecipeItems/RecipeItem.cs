@@ -1,12 +1,18 @@
 ﻿using Loita.RecipeSystem.Conditions;
 using Loita.RecipeSystem.Results;
 
+using Microsoft.Xna.Framework.Graphics;
+
 using System.Collections.Generic;
 
 namespace Loita.RecipeSystem.RecipeItems
 {
     internal abstract class RecipeItem
     {
+        public abstract List<RecipeCondition> Conditions { get; }
+        public abstract List<RecipeResult> Results { get; }
+        public abstract Texture2D Icon { get; }
+
         public abstract bool Permission();
 
         public abstract void Apply();
@@ -16,8 +22,8 @@ namespace Loita.RecipeSystem.RecipeItems
         where TCondition : RecipeCondition
         where TResult : RecipeResult
     {
-        public abstract List<TCondition> Conditions { get; }
-        public abstract List<TResult> Results { get; }
+        public List<TCondition> TConditions { get => Conditions.ConvertAll(r => (TCondition)r); }
+        public List<TResult> TResults { get => Results.ConvertAll(t => (TResult)t); }
 
         public virtual void AddCondition(TCondition condition)
         {
