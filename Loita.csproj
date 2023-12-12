@@ -92,4 +92,7 @@
 	<ItemGroup>
 	  <ModFile Remove="Items\ComponentAcquirer.cs" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Prefixes\CUnlimitedPenetrationPrefix.cs" />
+	</ItemGroup>
 </Project>
