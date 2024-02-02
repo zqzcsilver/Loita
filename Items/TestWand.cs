@@ -6,13 +6,17 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+
+using static Humanizer.In;
 
 namespace Loita.Items
 {
     internal class TestWand : WandBase
     {
         public override int SlotCount => 40;
+
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -21,7 +25,7 @@ namespace Loita.Items
             Item.damage = 30;
             Item.useTime = 10;
             Item.useAnimation = 10;
-            Item.shoot = ProjectileID.PaladinsHammerHostile;
+            Item.shoot = ProjectileID.UnholyArrow;
             Item.shootSpeed = 10f;
             Item.useStyle = ItemUseStyleID.Shoot;
         }
@@ -52,12 +56,15 @@ namespace Loita.Items
             spellInfo.Position = position;
             spellInfo.KnockbBack = knockback;
             InfusionSlot.Apply(spellInfo);
+
+            Projectile.NewProjectileDirect(source, position, velocity, ModContent.ProjectileType<ExampleTurret>(),
+                damage, knockback);
             return false;
         }
+
         public override void LoadData(TagCompound tag)
         {
             base.LoadData(tag);
-
         }
     }
 }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Loita.Components.LoitaComponents
 {
+    /// <summary>
+    /// 触发器基类
+    /// </summary>
     internal abstract class CTrigger : LoitaComponent
     {
         public override List<LoitaComponent> ActivableSpace => _activableSpace;

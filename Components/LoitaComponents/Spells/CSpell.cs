@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Loita.Components.LoitaComponents.Spells
 {
+    /// <summary>
+    /// 法术基类
+    /// </summary>
     internal abstract class CSpell : LoitaComponent
     {
         public CInfusionSlot InfusionSlot => Entity.GetComponent<CInfusionSlot>();

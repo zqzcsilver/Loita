@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace Loita.Components.LoitaComponents
 {
+    /// <summary>
+    /// 组件槽
+    /// </summary>
     internal class CInfusionSlot : LoitaComponent
     {
         public override List<LoitaComponent> ActivableSpace => _activableSpace;
@@ -16,7 +19,11 @@ namespace Loita.Components.LoitaComponents
             set { }
         }
 
+        /// <summary>
+        /// 槽位数量
+        /// </summary>
         public int SlotSize => _slotSize;
+
         private int _slotSize;
 
         public CInfusionSlot(IEntity entity) : this(entity, 20)
@@ -49,6 +56,7 @@ namespace Loita.Components.LoitaComponents
 
         public override void Load()
         {
+            //往实体注册 触发 与 初始化子组件 的钩子
             Entity.RegisterHook(this, "Apply", Apply);
             Entity.RegisterHook(this, "InitActivableSpace", InitActivableSpace);
         }
@@ -92,6 +100,11 @@ namespace Loita.Components.LoitaComponents
             return new CInfusionSlot(cloneEntity, SlotSize);
         }
 
+        /// <summary>
+        /// 更改组件槽内的组件
+        /// </summary>
+        /// <param name="index">索引</param>
+        /// <param name="component">组件实例</param>
         public void ChangeComponent(int index, LoitaComponent component)
         {
             if (index < 0 || index >= SlotSize)

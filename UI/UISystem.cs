@@ -40,7 +40,7 @@ namespace Loita.UI
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
             base.ModifyInterfaceLayers(layers);
-            int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
+            int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Cursor"));
             if (mouseTextIndex != -1)
             {
                 layers.Insert(mouseTextIndex, new LegacyGameInterfaceLayer(

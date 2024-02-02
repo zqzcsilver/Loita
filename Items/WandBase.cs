@@ -14,10 +14,24 @@ using Terraria.ModLoader;
 
 namespace Loita.Items
 {
+    /// <summary>
+    /// 法杖基类
+    /// </summary>
     internal abstract class WandBase : ModItem
     {
+        /// <summary>
+        /// 可装载组件的实体
+        /// </summary>
         public new IEntity Entity => Item.GetGlobalItem<GItem>();
+
+        /// <summary>
+        /// 组件槽
+        /// </summary>
         public CInfusionSlot InfusionSlot => Entity.GetComponent<CInfusionSlot>();
+
+        /// <summary>
+        /// 组件槽大小
+        /// </summary>
         public virtual int SlotCount => 1;
 
         public override void SetDefaults()
@@ -29,6 +43,9 @@ namespace Loita.Items
             InfusionSlot.InitActivableSpace(ref i);
         }
 
+        /// <summary>
+        /// 设置默认组件（初始组件）
+        /// </summary>
         public virtual void SetDefaultInfusion()
         {
         }

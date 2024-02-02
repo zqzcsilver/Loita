@@ -9,6 +9,9 @@ using System;
 
 namespace Loita.Components
 {
+    /// <summary>
+    /// 可以被玩家看见的非拆卸式组件基类
+    /// </summary>
     internal abstract class CInfusion : ComponentBase, IInfusion
     {
         protected CInfusion(IEntity entity) : base(entity)

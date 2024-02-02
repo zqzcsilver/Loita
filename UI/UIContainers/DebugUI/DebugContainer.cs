@@ -15,11 +15,14 @@ namespace Loita.UI.UIContainers.DebugUI
 {
     internal class DebugContainer : UIContainerElement
     {
+        public static DebugContainer Instance =>
+            (DebugContainer)Loita.UISystem.Elements["Loita.UI.UIContainers.DebugUI.DebugContainer"];
+
         public const string OPEN_HOT_KEY = "Open Debug Panel";
 
         public override void Load()
         {
-            Loita.KeyGroupManager.RegisterKeyGroup(new KeyGroup(OPEN_HOT_KEY, new List<Keys>() { Keys.U }));
+            Loita.KeyGroupManager.RegisterKeyGroup(new KeyGroup(OPEN_HOT_KEY, [Keys.U]));
             base.Load();
         }
 

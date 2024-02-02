@@ -94,5 +94,14 @@ public static class ModAssets_Hjson
 
     }
 
+    public static class Projectiles
+    {
+        public static class ExampleTurret
+        {
+            public const string DisplayName = "Projectiles.ExampleTurret.DisplayName";
+        }
+
+    }
+
 }
 

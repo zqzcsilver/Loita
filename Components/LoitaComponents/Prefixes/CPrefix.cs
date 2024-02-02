@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Loita.Components.LoitaComponents.Prefixes
 {
+    /// <summary>
+    /// 附魔基类
+    /// </summary>
     internal abstract class CPrefix : LoitaComponent
     {
         public override List<LoitaComponent> ActivableSpace => _activableSpace;

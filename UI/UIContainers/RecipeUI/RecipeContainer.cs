@@ -213,7 +213,7 @@ namespace Loita.UI.UIContainers.RecipeUI
         public override void Load()
         {
             base.Load();
-            Loita.KeyGroupManager.RegisterKeyGroup(new KeyGroup(OPEN_HOT_KEY, new List<Keys>() { Keys.P }));
+            Loita.KeyGroupManager.RegisterKeyGroup(new KeyGroup(OPEN_HOT_KEY, [Keys.P]));
         }
 
         public override void OnInitialization()

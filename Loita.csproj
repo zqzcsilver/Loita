@@ -92,4 +92,16 @@
 	<ItemGroup>
 	  <ModFile Remove="Items\ComponentAcquirer.cs" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="MagicTrail\Nodes\MagicNode.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="MagicTrail\Nodes\MagicParameters.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="UI\UIContainers\MagicTrailEditor\MagicTrailContainer.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Items\ExampleTurret.cs" />
+	</ItemGroup>
 </Project>
