@@ -1,87 +1,104 @@
 # Loita
 
-## Spells
+## 法术
 
-### Dynamic Spells
+### 动态法术
 
-- [ ] spark
-- [ ] energy ball
-- [ ] bouncing Ball
-- [ ] sparky missile
-- ... anything you can imagine
+- [ ] 火花
+- [ ] 能量球
+- [ ] 弹跳球
+- [ ] 火花导弹（就 Noita 魔法导弹那种）
+- …… 看你的想象力了
 
-### Static Spells
+### 静态法术
 
-- formations
+- 法阵
 
-    - [ ] damage
-    - [ ] heal
-    - [ ] buff
-    - [ ] nerf
-    - ...
+    - [ ] 伤害（实时按 GetDamage 更新）
+    - [ ] 治疗
+    - [ ] 增益
+    - [ ] 削弱
+    - ……
 
 - weathers
 
-    - [ ] sun (lighting)
-    - [ ] rain
-    - [ ] storm
-    - ...
+    - [ ] 日照
+    - [ ] 雨
+    - [ ] 风暴
+    - ……
 
-### Modifiers
+### 修饰
 
-- damage
+- 伤害
 
-    - [ ] increase/decrease
-    - [ ] increase/decrease but ...
-    - [ ] increase/decrease crit
-    - [ ] increase/decrease crit but ...
-    - ...
+    - [ ] 增/减（但是会……）
+    - [ ] 增/减暴击率（但是会……）
+    - [ ] 增/减击退（但是会……）
+    - ……
 
-- vfx
+- 视效
 
-    - [x] emit light
-    - [ ] dim light
-    - [ ] colored light
+    - [x] 发光
+    - [ ] 吸光
+    - [ ] 彩色
+    ……
 
-- path
+- 资源
 
-    - [ ] spiral
-    - [ ] force axis/diagnal
-    - [ ] chase closest
-    - [ ] chase closest in line of sight
-    - [ ] aim
-    - [ ] circle
-    - [ ] bounce
-    - [ ] random
-    - ...
+    - [ ] 回复魔力
+    - [ ] 回复生命
+    ……
 
-- projectile
+- 交互
 
-    - [ ] duplicate
-    - [ ] generate
-    - [ ] replace
-    - ...
+    - [ ] 破坏/生成物块/NPC
+    - [ ] 推/拉 NPC/玩家
+    - [ ] 吸收/生成液体
+    ……
 
-- trigger
+- 路径
 
-    - [ ] kill
-    - [ ] timeout
-    - [ ] tile collision
-    - [ ] entity collision
-    - ...
+    - [ ] 螺旋
+    - [ ] 沿坐标轴/斜线
+    - [ ] 追踪
+    - [ ] 追踪视线内的
+    - [ ] 发射时自动瞄准
+    - [ ] 圆形
+    - [ ] 弹跳
+    - [ ] 随机
+    - ……
 
-### Multicast
+- 投射物
 
-- [ ] 2/3/4... casts with random spread
-- [ ] 2/3/4... casts with regular spread
-- [ ] 2/3/4... casts with other formations (axis, hex, ...)
-- ...
+    - [ ] 复制
+    - [ ] 生成
+    - [ ] 替换
+    - ……
 
-### Origin
+- 施法
 
-- [ ] at a distance
-- [ ] on closest enemy
-- [ ] at a distance ignoring tiles
-- [ ] other offsets
-- ...
+    - [ ] 降低冷却
+    - [ ] 降低充能
+    ……
+
+- 触发
+
+    - [ ] 消失
+    - [ ] 定时
+    - [ ] 撞击（物块、敌人……）
+    - [ ] 击杀敌人
+    - ……
+
+### 多重释放
+
+- [ ] 2/3/4... 个法术 + 随机散布
+- [ ] 2/3/4... 个法术 + 固定散步
+- [ ] 2/3/4... 个法术 + 其他阵列（十字、六角……）
+- ……
+
+### 施法原点
+
+- [ ] 延伸一定距离（无视/不无视物块）
+- [ ] 在最近的敌人身上
+- ……
 
