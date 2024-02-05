@@ -5,8 +5,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 using System;
 
-using Terraria;
-
 namespace Loita.RecipeSystem.Conditions
 {
     internal abstract class LCCondition : RecipeCondition

@@ -1,104 +1,113 @@
 namespace Loita.QuickAssetReference;
 public static class ModAssets_Hjson
 {
-    public static class Items
+    public static class Mods
     {
-        public static class TestWand
-        {
-            public const string DisplayName = "Items.TestWand.DisplayName";
-            public const string Tooltip = "Items.TestWand.Tooltip";
-        }
-
         public static class Loita
         {
             public static class Items
             {
-                public static class TestWand
+                public static class WTest
                 {
-                    public const string DisplayName = "Items.Loita.Items.TestWand.DisplayName";
-                    public const string Tooltip = "Items.Loita.Items.TestWand.Tooltip";
+                    public const string DisplayName = "Mods.Loita.Items.WTest.DisplayName";
+                    public const string Tooltip = "Mods.Loita.Items.WTest.Tooltip";
                 }
 
-                public static class TestWand1
+                public static class TDoubleSpell
                 {
-                    public const string DisplayName = "Items.Loita.Items.TestWand1.DisplayName";
-                    public const string Tooltip = "Items.Loita.Items.TestWand1.Tooltip";
+                    public const string Tooltip = "Mods.Loita.Items.TDoubleSpell.Tooltip";
+                }
+
+                public static class TQSRPBM
+                {
+                    public const string Tooltip = "Mods.Loita.Items.TQSRPBM.Tooltip";
+                }
+
+                public static class SArrow
+                {
+                    public const string Tooltip = "Mods.Loita.Items.SArrow.Tooltip";
+                }
+
+                public static class PDoubleDamage
+                {
+                    public const string Tooltip = "Mods.Loita.Items.PDoubleDamage.Tooltip";
+                }
+
+                public static class PLight
+                {
+                    public const string Tooltip = "Mods.Loita.Items.PLight.Tooltip";
+                }
+
+                public static class POnePenetration
+                {
+                    public const string Tooltip = "Mods.Loita.Items.POnePenetration.Tooltip";
+                }
+
+                public static class PUnlimitedPenetration
+                {
+                    public const string Tooltip = "Mods.Loita.Items.PUnlimitedPenetration.Tooltip";
                 }
 
             }
 
-        }
+            public static class Infusions
+            {
+                public static class Prefixes
+                {
+                    public static class PLight
+                    {
+                        public const string Name = "Mods.Loita.Infusions.Prefixes.PLight.Name";
+                        public const string Description = "Mods.Loita.Infusions.Prefixes.PLight.Description";
+                    }
 
-        public static class TestWand1
-        {
-            public const string DisplayName = "Items.TestWand1.DisplayName";
-            public const string Tooltip = "Items.TestWand1.Tooltip";
-        }
+                    public static class POnePenetration
+                    {
+                        public const string Name = "Mods.Loita.Infusions.Prefixes.POnePenetration.Name";
+                        public const string Description = "Mods.Loita.Infusions.Prefixes.POnePenetration.Description";
+                    }
 
-        public static class ComponentAcquirer
-        {
-            public const string DisplayName = "Items.ComponentAcquirer.DisplayName";
-            public const string Tooltip = "Items.ComponentAcquirer.Tooltip";
-        }
+                    public static class PUnlimitedPenetration
+                    {
+                        public const string Name = "Mods.Loita.Infusions.Prefixes.PUnlimitedPenetration.Name";
+                        public const string Description = "Mods.Loita.Infusions.Prefixes.PUnlimitedPenetration.Description";
+                    }
 
-        public static class Component_Acquirer
-        {
-            public const string DisplayName = "Items.Component_Acquirer.DisplayName";
-            public const string Tooltip = "Items.Component_Acquirer.Tooltip";
-        }
+                    public static class PDoubleDamage
+                    {
+                        public const string Name = "Mods.Loita.Infusions.Prefixes.PDoubleDamage.Name";
+                        public const string Description = "Mods.Loita.Infusions.Prefixes.PDoubleDamage.Description";
+                    }
 
-        public static class CDoubleSpell
-        {
-            public const string Tooltip = "Items.CDoubleSpell.Tooltip";
-        }
+                }
 
-        public static class CQuadrupleSpellRandomPositionByMouse
-        {
-            public const string Tooltip = "Items.CQuadrupleSpellRandomPositionByMouse.Tooltip";
-        }
+                public static class Spells
+                {
+                    public static class SArrow
+                    {
+                        public const string Name = "Mods.Loita.Infusions.Spells.SArrow.Name";
+                        public const string Description = "Mods.Loita.Infusions.Spells.SArrow.Description";
+                    }
 
-        public static class CTestSpell
-        {
-            public const string Tooltip = "Items.CTestSpell.Tooltip";
-        }
+                }
 
-        public static class CLightPrefix
-        {
-            public const string Tooltip = "Items.CLightPrefix.Tooltip";
-        }
+                public static class Triggers
+                {
+                    public static class TDoubleSpell
+                    {
+                        public const string Name = "Mods.Loita.Infusions.Triggers.TDoubleSpell.Name";
+                        public const string Description = "Mods.Loita.Infusions.Triggers.TDoubleSpell.Description";
+                    }
 
-        public static class COnePenetrationPrefix
-        {
-            public const string Tooltip = "Items.COnePenetrationPrefix.Tooltip";
-        }
+                    public static class TQSRPBM
+                    {
+                        public const string Name = "Mods.Loita.Infusions.Triggers.TQSRPBM.Name";
+                        public const string Description = "Mods.Loita.Infusions.Triggers.TQSRPBM.Description";
+                    }
 
-        public static class DoubleDamage
-        {
-            public const string Tooltip = "Items.DoubleDamage.Tooltip";
-        }
+                }
 
-        public static class Head
-        {
-            public const string DisplayName = "Items.Head.DisplayName";
-            public const string Tooltip = "Items.Head.Tooltip";
-        }
+            }
 
-    }
-
-    public static class Keybinds
-    {
-        public static class Loita_Console
-        {
-            public const string DisplayName = "Keybinds.Loita_Console.DisplayName";
-        }
-
-    }
-
-    public static class Projectiles
-    {
-        public static class ExampleTurret
-        {
-            public const string DisplayName = "Projectiles.ExampleTurret.DisplayName";
         }
 
     }

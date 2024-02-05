@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using Terraria;
-
 namespace Loita.UI.UIElements
 {
     internal class UIImage : BaseElement

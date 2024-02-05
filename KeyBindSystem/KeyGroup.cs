@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-using Loita.UI;
+﻿using Loita.UI;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 using Terraria;
 

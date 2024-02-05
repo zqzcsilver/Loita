@@ -1,7 +1,6 @@
 ﻿using Loita.Components;
 using Loita.Components.LoitaComponents;
 using Loita.Components.LoitaComponents.Prefixes;
-using Loita.Components.LoitaComponents.Triggers;
 using Loita.Globals;
 using Loita.Items;
 using Loita.UI.UIContainers.InfusionBackpack;
@@ -11,7 +10,6 @@ using System.Collections.Generic;
 using System.IO;
 
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -43,7 +41,7 @@ namespace Loita.ModPlayers
             //Loita.RecipeSystem.ForEach(r => r.Apply());
             Item.NewItem(Player.GetSource_FromThis(),
                 Player.Center - new Microsoft.Xna.Framework.Vector2(200f, 0f),
-                ComponentAcquirer.GetItemID<DoubleDamage>(), 10);
+                ComponentAcquirer.GetItemID<PDoubleDamage>(), 10);
             //var item = Player.QuickSpawnItemDirect(Player.GetSource_FromThis(), ModContent.ItemType<ComponentAcquirer>(), 10);
             base.OnEnterWorld();
         }
@@ -285,16 +283,24 @@ namespace Loita.ModPlayers
                 int count = reader.ReadInt32();
                 for (int i = 0; i < count; i++)
                 {
-                    var type = Type.GetType(reader.ReadString());
-                    if (!IAmEntity.HasComponent(type))
+                    try
                     {
-                        var component = (IComponent)Activator.CreateInstance(type, this);
-                        IAmEntity.AddComponent(component);
+                        var type = Type.GetType(reader.ReadString());
+                        if (!IAmEntity.HasComponent(type))
+                        {
+                            var component = (IComponent)Activator.CreateInstance(type, this);
+                            IAmEntity.AddComponent(component);
+                        }
+                        else
+                        {
+                            if (IAmEntity.GetComponent(type) is IBinarySupport binary)
+                                binary.ReadOnBinary(reader);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        if (IAmEntity.GetComponent(type) is IBinarySupport binary)
-                            binary.ReadOnBinary(reader);
+                        Console.WriteLine($"读取物玩家组件时发生异常。\n玩家：{Player.name}\n异常：{ex}");
+                        break;
                     }
                 }
 
@@ -319,9 +325,17 @@ namespace Loita.ModPlayers
             int count = br.ReadInt32();
             for (int i = 0; i < count; i++)
             {
-                var comp = (LoitaComponent)Activator.CreateInstance(Type.GetType(br.ReadString()), IAmEntity);
-                comp.ReadOnBinary(br);
-                ComponentBackpack.Add(comp);
+                try
+                {
+                    var comp = (LoitaComponent)Activator.CreateInstance(Type.GetType(br.ReadString()), IAmEntity);
+                    comp.ReadOnBinary(br);
+                    ComponentBackpack.Add(comp);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"读取物玩家组件时发生异常。\n玩家：{Player.name}\n异常：{ex}");
+                    break;
+                }
             }
         }
 

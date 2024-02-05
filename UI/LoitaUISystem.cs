@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Loita.UI.UIContainers.DebugUI.DebugItems;
+﻿using Loita.UI.UIContainers.DebugUI.DebugItems;
 using Loita.UI.UIElements;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using Terraria;
 

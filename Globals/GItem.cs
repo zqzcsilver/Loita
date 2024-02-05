@@ -59,16 +59,24 @@ namespace Loita.Globals
                 int count = reader.ReadInt32();
                 for (int i = 0; i < count; i++)
                 {
-                    var type = Type.GetType(reader.ReadString());
-                    if (!Entity.HasComponent(type))
+                    try
                     {
-                        var component = (IComponent)Activator.CreateInstance(type, this);
-                        Entity.AddComponent(component);
+                        var type = Type.GetType(reader.ReadString());
+                        if (!Entity.HasComponent(type))
+                        {
+                            var component = (IComponent)Activator.CreateInstance(type, this);
+                            Entity.AddComponent(component);
+                        }
+                        else
+                        {
+                            if (Entity.GetComponent(type) is IBinarySupport binary)
+                                binary.ReadOnBinary(reader);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        if (Entity.GetComponent(type) is IBinarySupport binary)
-                            binary.ReadOnBinary(reader);
+                        Console.WriteLine($"读取物品组件时发生异常。\n物品：{item.Name}\n异常：{ex}");
+                        break;
                     }
                 }
             }

@@ -1,0 +1,65 @@
+Mods: {
+	Loita: {
+		Items: {
+			WTest: {
+				DisplayName: 测试法杖
+				Tooltip: 用于测试的法杖
+			}
+
+			// TDoubleSpell.Tooltip: ""
+			// TQSRPBM.Tooltip: ""
+			// SArrow.Tooltip: ""
+			// PDoubleDamage.Tooltip: ""
+			// PLight.Tooltip: ""
+			// POnePenetration.Tooltip: ""
+			// PUnlimitedPenetration.Tooltip: ""
+		}
+
+		Infusions: {
+			Prefixes: {
+				PLight: {
+					Name: 发光
+					Description: 为魔法附加发光效果
+				}
+
+				POnePenetration: {
+					Name: 初级穿透
+					Description:
+						'''
+						使你的法术在发射时穿透数量+1
+						注：对无限穿透法术无效
+						'''
+				}
+
+				PUnlimitedPenetration: {
+					Name: 无限穿透
+					Description: 使你的法术变为无限穿透
+				}
+
+				PDoubleDamage: {
+					Name: 双倍伤害
+					Description: 使你的法术在发射时伤害翻倍
+				}
+			}
+
+			Spells: {
+				SArrow: {
+					Name: 箭矢
+					Description: 释放一支箭矢造成伤害
+				}
+			}
+
+			Triggers: {
+				TDoubleSpell: {
+					Name: 双重释放
+					Description: 能够以夹角为10°的角度(调用链上每有一个双重释放法术则角度/2)同时释放两个法术
+				}
+
+				TQSRPBM: {
+					Name: 四重释放-鼠标随机
+					Description: 以鼠标位置作为原点，随机取原点周围位置作为法术发射位置，并以原点方向作为法术发射方向。重复四次。
+				}
+			}
+		}
+	}
+}

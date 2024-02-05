@@ -9,8 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Terraria;
-
 namespace Loita.UI.UIContainers.DebugUI
 {
     internal class DebugContainer : UIContainerElement

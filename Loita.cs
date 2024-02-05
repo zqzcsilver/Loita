@@ -104,8 +104,8 @@ namespace Loita
             for (int i = 0; i < 100; i++)
             {
                 LCRecipeItem recipeItem = new LCRecipeItem();
-                recipeItem.AddCondition(new LCCondition<CDoubleSpell>());
-                recipeItem.AddResult(new LCResult<CTestSpell>());
+                recipeItem.AddCondition(new LCCondition<TDoubleSpell>());
+                recipeItem.AddResult(new LCResult<SArrow>());
                 RecipeSystem.Register(recipeItem);
             }
         }

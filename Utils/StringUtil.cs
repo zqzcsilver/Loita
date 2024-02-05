@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ReLogic.Graphics;
+
+using System;
 using System.Collections.Generic;
 using System.Text;
-
-using ReLogic.Graphics;
 
 namespace Loita.Utils
 {

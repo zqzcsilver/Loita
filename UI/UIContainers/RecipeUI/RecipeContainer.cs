@@ -1,6 +1,6 @@
-﻿using Loita.Components.LoitaComponents;
-using Loita.Components.LoitaComponents.Prefixes;
+﻿using Loita.Components.LoitaComponents.Prefixes;
 using Loita.Components.LoitaComponents.Spells;
+using Loita.Components.LoitaComponents.Triggers;
 using Loita.KeyBindSystem;
 using Loita.QuickAssetReference;
 using Loita.RecipeSystem.RecipeItems;

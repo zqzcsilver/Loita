@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Microsoft.Xna.Framework;
 
 using Terraria;
 
@@ -20,8 +14,6 @@ namespace Loita.Components.ProjectileComponents
             OnHitNPC,
             Okay
         }
-
-        public delegate void OkayDelegate(Projectile projectile, ref Color color);
 
         public LogicComponentBase(IEntity entity) : base(entity)
         {
@@ -45,10 +37,6 @@ namespace Loita.Components.ProjectileComponents
         }
 
         public virtual void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-        }
-
-        public virtual void Okay(Projectile projectile, ref Color color)
         {
         }
     }

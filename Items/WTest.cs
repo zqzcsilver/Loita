@@ -6,14 +6,11 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-
-using static Humanizer.In;
 
 namespace Loita.Items
 {
-    internal class TestWand : WandBase
+    internal class WTest : WandBase
     {
         public override int SlotCount => 40;
 
@@ -43,7 +40,7 @@ namespace Loita.Items
             //    InfusionSlot.ChangeComponent(0, new CLightPrefix(Entity));
             //else if (r == 3)
             //    InfusionSlot.ChangeComponent(0, new CFirePrefix(Entity));
-            InfusionSlot.ChangeComponent(0, new CTestSpell(Entity));
+            InfusionSlot.ChangeComponent(0, new SArrow(Entity));
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -56,9 +53,6 @@ namespace Loita.Items
             spellInfo.Position = position;
             spellInfo.KnockbBack = knockback;
             InfusionSlot.Apply(spellInfo);
-
-            Projectile.NewProjectileDirect(source, position, velocity, ModContent.ProjectileType<ExampleTurret>(),
-                damage, knockback);
             return false;
         }
 

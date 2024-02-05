@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Loita.Components.LoitaComponents
+using Terraria.Localization;
+
+namespace Loita.Components.LoitaComponents.Triggers
 {
     /// <summary>
     /// 触发器基类
@@ -20,6 +19,9 @@ namespace Loita.Components.LoitaComponents
         {
             get;
         }
+
+        public override string Name => Language.GetTextValue($"Mods.Loita.Infusions.Triggers.{GetType().Name}.Name");
+        public override string Description => Language.GetTextValue($"Mods.Loita.Infusions.Triggers.{GetType().Name}.Description");
 
         public CTrigger(IEntity entity) : base(entity)
         {

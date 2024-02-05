@@ -5,31 +5,23 @@ using Loita.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using System;
-
 using Terraria;
 
 namespace Loita.Components.ProjectileComponents
 {
-    internal class LightComponent : LogicComponentBase, IInfusion
+    internal class CPLight : LogicComponentBase, IInfusion
     {
         public string Name => "发光";
 
         public string Description => "此魔法将会发出光芒";
 
-        public LightComponent(IEntity entity) : base(entity)
+        public CPLight(IEntity entity) : base(entity)
         {
         }
 
         public override void Load()
         {
             RegisterHook(HookType.AI, AI);
-            RegisterHook(HookType.Okay, new OkayDelegate(Okay));
-        }
-
-        public override void Okay(Projectile projectile, ref Color color)
-        {
-            base.Okay(projectile, ref color);
         }
 
         public override void AI(Projectile projectile)

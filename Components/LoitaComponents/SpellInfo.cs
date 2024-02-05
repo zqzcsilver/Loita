@@ -1,4 +1,5 @@
 ﻿using Loita.Components.LoitaComponents.Prefixes;
+using Loita.Components.LoitaComponents.Triggers;
 using Loita.Globals;
 
 using Microsoft.Xna.Framework;

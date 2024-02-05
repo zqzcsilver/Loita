@@ -1,12 +1,8 @@
 ﻿namespace Loita.Components.LoitaComponents.Prefixes
 {
-    internal class CUnlimitedPenetrationPrefix : CPrefix
+    internal class PUnlimitedPenetration : CPrefix
     {
-        public override string Name => "无限穿透";
-
-        public override string Description => "使你的法术变为无限穿透";
-
-        public CUnlimitedPenetrationPrefix(IEntity entity) : base(entity)
+        public PUnlimitedPenetration(IEntity entity) : base(entity)
         {
         }
 

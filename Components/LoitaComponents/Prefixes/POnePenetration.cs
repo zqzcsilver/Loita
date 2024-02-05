@@ -1,12 +1,8 @@
 ﻿namespace Loita.Components.LoitaComponents.Prefixes
 {
-    internal class COnePenetrationPrefix : CPrefix
+    internal class POnePenetration : CPrefix
     {
-        public override string Name => "初级穿透";
-
-        public override string Description => "使你的法术在发射时穿透数量+1\n注：对无限穿透法术无效";
-
-        public COnePenetrationPrefix(IEntity entity) : base(entity)
+        public POnePenetration(IEntity entity) : base(entity)
         {
         }
 

@@ -1,0 +1,61 @@
+Mods: {
+	Loita: {
+		Items: {
+			WTest: {
+				DisplayName: Test Wand
+				Tooltip: ""
+			}
+
+			TDoubleSpell.Tooltip: ""
+			TQSRPBM.Tooltip: ""
+			SArrow.Tooltip: ""
+			PDoubleDamage.Tooltip: ""
+			PLight.Tooltip: ""
+			POnePenetration.Tooltip: ""
+			PUnlimitedPenetration.Tooltip: ""
+		}
+
+		Infusions: {
+			Prefixes: {
+				PLight: {
+					Name: ""
+					Description: ""
+				}
+
+				POnePenetration: {
+					Name: ""
+					Description: ""
+				}
+
+				PUnlimitedPenetration: {
+					Name: ""
+					Description: ""
+				}
+
+				PDoubleDamage: {
+					Name: ""
+					Description: ""
+				}
+			}
+
+			Spells: {
+				SArrow: {
+					Name: ""
+					Description: ""
+				}
+			}
+
+			Triggers: {
+				TDoubleSpell: {
+					Name: ""
+					Description: ""
+				}
+
+				TQSRPBM: {
+					Name: ""
+					Description: ""
+				}
+			}
+		}
+	}
+}

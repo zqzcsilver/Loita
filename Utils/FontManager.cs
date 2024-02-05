@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
-
-using FontStashSharp;
+﻿using FontStashSharp;
 
 using Loita.UI.UIContainers.DebugUI.DebugItems;
+
+using System.Collections.Generic;
+using System.IO;
 
 namespace Loita.Utils
 {

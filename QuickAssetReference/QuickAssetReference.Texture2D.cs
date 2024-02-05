@@ -1,5 +1,6 @@
-using ReLogic.Content;
 using Microsoft.Xna.Framework.Graphics;
+
+using ReLogic.Content;
 
 namespace Loita.QuickAssetReference;
 public static class ModAssets_Texture2D
@@ -13,18 +14,18 @@ public static class ModAssets_Texture2D
         {
             public static class Prefixes
             {
-                public static Asset<Texture2D> CLightPrefixAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CLightPrefixPath);
-                public static Asset<Texture2D> CLightPrefixImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CLightPrefixPath, AssetRequestMode.ImmediateLoad);
-                public const string CLightPrefixPath = "Components/LoitaComponents/Prefixes/CLightPrefix";
-                public static Asset<Texture2D> COnePenetrationPrefixAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(COnePenetrationPrefixPath);
-                public static Asset<Texture2D> COnePenetrationPrefixImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(COnePenetrationPrefixPath, AssetRequestMode.ImmediateLoad);
-                public const string COnePenetrationPrefixPath = "Components/LoitaComponents/Prefixes/COnePenetrationPrefix";
                 public static Asset<Texture2D> CUnlimitedPenetrationPrefixAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CUnlimitedPenetrationPrefixPath);
                 public static Asset<Texture2D> CUnlimitedPenetrationPrefixImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(CUnlimitedPenetrationPrefixPath, AssetRequestMode.ImmediateLoad);
                 public const string CUnlimitedPenetrationPrefixPath = "Components/LoitaComponents/Prefixes/CUnlimitedPenetrationPrefix";
                 public static Asset<Texture2D> DoubleDamageAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(DoubleDamagePath);
                 public static Asset<Texture2D> DoubleDamageImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(DoubleDamagePath, AssetRequestMode.ImmediateLoad);
                 public const string DoubleDamagePath = "Components/LoitaComponents/Prefixes/DoubleDamage";
+                public static Asset<Texture2D> PLightAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(PLightPath);
+                public static Asset<Texture2D> PLightImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(PLightPath, AssetRequestMode.ImmediateLoad);
+                public const string PLightPath = "Components/LoitaComponents/Prefixes/PLight";
+                public static Asset<Texture2D> POnePenetrationAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(POnePenetrationPath);
+                public static Asset<Texture2D> POnePenetrationImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(POnePenetrationPath, AssetRequestMode.ImmediateLoad);
+                public const string POnePenetrationPath = "Components/LoitaComponents/Prefixes/POnePenetration";
             }
 
             public static class Spells
@@ -82,12 +83,6 @@ public static class ModAssets_Texture2D
 
     public static class Items
     {
-        public static Asset<Texture2D> HeadAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(HeadPath);
-        public static Asset<Texture2D> HeadImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(HeadPath, AssetRequestMode.ImmediateLoad);
-        public const string HeadPath = "Items/Head";
-        public static Asset<Texture2D> Head_HeadAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(Head_HeadPath);
-        public static Asset<Texture2D> Head_HeadImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(Head_HeadPath, AssetRequestMode.ImmediateLoad);
-        public const string Head_HeadPath = "Items/Head_Head";
         public static Asset<Texture2D> TestWandAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(TestWandPath);
         public static Asset<Texture2D> TestWandImmediateAsset => ModAssets_Utils.Mod.Assets.Request<Texture2D>(TestWandPath, AssetRequestMode.ImmediateLoad);
         public const string TestWandPath = "Items/TestWand";

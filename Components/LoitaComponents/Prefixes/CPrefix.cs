@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Terraria.Localization;
+
 namespace Loita.Components.LoitaComponents.Prefixes
 {
     /// <summary>
@@ -12,6 +14,8 @@ namespace Loita.Components.LoitaComponents.Prefixes
         private List<LoitaComponent> _activableSpace = new List<LoitaComponent>();
 
         public CInfusionSlot InfusionSlot => Entity.GetComponent<CInfusionSlot>();
+        public override string Name => Language.GetTextValue($"Mods.Loita.Infusions.Prefixes.{GetType().Name}.Name");
+        public override string Description => Language.GetTextValue($"Mods.Loita.Infusions.Prefixes.{GetType().Name}.Description");
 
         public CPrefix(IEntity entity) : base(entity)
         {

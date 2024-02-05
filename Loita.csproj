@@ -8,6 +8,10 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <AdditionalFiles Remove="Localization\zh-CN_Mods.Loita.hjson" />
+    <AdditionalFiles Remove="Localization\zh-Hans.Mods.Loita.hjson" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
 	  <PackageReference Include="QuickAssetReference.TModLoader" Version="1.0.3">
 		  <PrivateAssets>all</PrivateAssets>
@@ -43,18 +47,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ModFile Remove="Items\WandBase.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ModFile Remove="Items\TestWand.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ModFile Remove="Components\LoitaComponents\Prefixes\DoubleDamage.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ModFile Remove="Components\LoitaComponents\Triggers\CQuadrupleSpellRandomPositionByMouse.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ModFile Remove="Components\LoitaComponents\Prefixes\COnePenetrationPrefix.cs" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ModFile Remove="RecipeSystem\RecipeCondition.cs" />
@@ -102,6 +94,117 @@
 	  <ModFile Remove="UI\UIContainers\MagicTrailEditor\MagicTrailContainer.cs" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ModFile Remove="Items\ExampleTurret.cs" />
+	  <ModFile Remove="Components\LoitaComponents\Prefixes\PLight.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Prefixes\PLight.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ImageFile Remove="Components\LoitaComponents\Prefixes\PLight.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Prefixes\POnePenetration.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Prefixes\POnePenetration.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ImageFile Remove="Components\LoitaComponents\Prefixes\POnePenetration.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Prefixes\PDoubleDamage.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Prefixes\PDoubleDamage.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ImageFile Remove="Components\LoitaComponents\Prefixes\PDoubleDamage.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Prefixes\PUnlimitedPenetration.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Prefixes\PUnlimitedPenetration.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ImageFile Remove="Components\LoitaComponents\Prefixes\PUnlimitedPenetration.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Triggers\TDoubleSpell.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Triggers\TDoubleSpell.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ImageFile Remove="Components\LoitaComponents\Triggers\TDoubleSpell.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Docs\命名规则.md" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\ProjectileComponents\CPLight.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Docs\法术设计.md" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Triggers\TQSRPBM.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Triggers\TQSRPBM.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ImageFile Remove="Components\LoitaComponents\Triggers\TQSRPBM.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Items\WTest.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Items\WTest.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ImageFile Remove="Items\WTest.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="zh-CN_Mods.Loita.hjson" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Localization\zh-CN_Mods.Loita.hjson" />
+	</ItemGroup>
+	<ItemGroup>
+	  <HjsonFile Remove="Localization\zh-CN_Mods.Loita.hjson" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Spells\SArrow.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Components\LoitaComponents\Spells\SArrow.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ImageFile Remove="Components\LoitaComponents\Spells\SArrow.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="zh-CN_Mods.Loita.hjson" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Localization\zh-CN_Mods.Loita.hjson" />
+	</ItemGroup>
+	<ItemGroup>
+	  <HjsonFile Remove="Localization\zh-CN_Mods.Loita.hjson" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Localization\zh-Hans.Mods.Loita.hjson" />
+	</ItemGroup>
+	<ItemGroup>
+	  <HjsonFile Remove="Localization\zh-Hans.Mods.Loita.hjson" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Localization\en-US.hjson" />
+	</ItemGroup>
+	<ItemGroup>
+	  <HjsonFile Remove="Localization\en-US.hjson" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ModFile Remove="Localization\zh-Hans.hjson.legacy" />
 	</ItemGroup>
 </Project>

@@ -1,17 +1,12 @@
 ﻿using FontStashSharp;
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-using MonoMod.Core.Platforms;
-
-using ReLogic.Content;
 using ReLogic.Graphics;
 
 using System.Collections.Generic;
 
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
